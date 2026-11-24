@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Crítico y Plan de Mejora Web — Nara Med Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #120e10;
+      --bg-card: #1c1618;
+      --bg-card-alt: #241c1f;
+      --border: rgba(201, 169, 110, 0.22);
+      --danger: #ff4d5e;
+      --danger-soft: rgba(255, 77, 94, 0.12);
+      --danger-border: rgba(255, 77, 94, 0.35);
+      --improve: #d4af7a;
+      --improve-soft: rgba(212, 175, 122, 0.12);
+      --improve-border: rgba(212, 175, 122, 0.4);
+      --text: #f7f3f0;
+      --text-muted: #b8aba6;
+      --rose: #bf8a8e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at top right, #2a1b1f 0%, var(--bg-dark) 45%);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 40px 20px 80px;
+    }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    header {
+      background: linear-gradient(135deg, rgba(36, 28, 31, 0.95), rgba(18, 14, 16, 0.98));
+      border: 1px solid var(--danger-border);
+      border-radius: 24px;
+      padding: 42px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    .badge-critico {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 820px;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .kpi-card {
+      background: rgba(255, 77, 94, 0.07);
+      border: 1px solid var(--danger-border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .kpi-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--danger);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .kpi-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .section-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 26px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .tag-count {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .issues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .issue-card {
+      background: rgba(255, 255, 255, 0.025);
+      border-left: 4px solid var(--danger);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .issue-card h3 {
+      font-size: 1.02rem;
+      color: #ff8590;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .issue-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .code-pill {
+      display: inline-block;
+      background: rgba(0,0,0,0.45);
+      color: #ffb3ba;
+      font-family: monospace;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.83rem;
+      border: 1px solid rgba(255,77,94,0.25);
+    }
+    .improve-box {
+      background: var(--improve-soft);
+      border: 1px solid var(--improve-border);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+    .improve-box h4 {
+      color: var(--improve);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .improve-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px 24px;
+      list-style: none;
+    }
+    .improve-list li {
+      font-size: 0.93rem;
+      color: #f3e9dc;
+      position: relative;
+      padding-left: 22px;
+    }
+    .improve-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--improve);
+      font-weight: 800;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 26px;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 13px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    th {
+      background: rgba(255, 77, 94, 0.14);
+      color: #ff9aa3;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, #2a1d21, #191315);
+      border: 1px solid var(--improve-border);
+      border-radius: 24px;
+      padding: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .btn-proto {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #d4af7a, #b5894c);
+      color: #120e10;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(212, 175, 122, 0.3);
+    }
+    .btn-proto:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(212, 175, 122, 0.45);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-critico">● Auditoría Técnica, Visual y SEO — naramedspa.com</div>
+      <h1>Diagnóstico de Puntos Críticos y Áreas de Mejora</h1>
+      <p class="subtitle">
+        Revisión exhaustiva del sitio actual de <strong>Nara Med Spa</strong>. A continuación se documentan exclusivamente los errores técnicos, de diseño, experiencia de usuario y posicionamiento en Google que hoy frenan la conversión de pacientes, seguidos de las acciones correctivas implementadas en el nuevo prototipo.
+      </p>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-num">0 H1 / 0 Meta</div>
+          <div class="kpi-label">Sin título principal <code>&lt;h1&gt;</code> ni meta descripción para Google en la página de inicio</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">46 Botones PNG</div>
+          <div class="kpi-label">Botones pegados como imágenes estáticas exportadas de Photoshop (borrosos y sin texto para SEO)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">92 Imágenes</div>
+          <div class="kpi-label">En la portada con atributo <code>alt=""</code> vacío (0% indexación en Google Imágenes)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">6 Páginas</div>
+          <div class="kpi-label">Con títulos SEO cruzados por clonar plantillas sin cambiarles el nombre del tratamiento</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. DISEÑO VISUAL Y MAQUETACIÓN -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">1. Fallas de Diseño Visual y Maquetación (UI)</h2>
+        <span class="tag-count">7 Fallos Críticos</span>
+      </div>
+      <div class="issues-grid">
+        <div class="issue-card">
+          <h3>✕ Botones hechos con imágenes PNG</h3>
+          <p>Los botones de <em>"AGENDA TU CITA"</em>, redes sociales y los 46 tratamientos son archivos PNG (<span class="code-pill">Sin-titulo-1_00XX_BOTON.png</span>). Se ven pixelados en celulares, pesan demasiado y no reaccionan al tacto ni al cursor.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Cuadro negro tapando el video principal</h3>
+          <p>En la portada, un contenedor oscuro mal ajustado del reproductor de Vimeo cubre la mitad izquierda del video de bienvenida tanto en escritorio como en teléfono.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Menú lateral tapado por el video (Z-Index roto)</h3>
+          <p>Al abrir el menú hamburguesa, el reproductor de video queda por encima del panel de navegación, tapando las opciones del menú.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Logotipo encimado sobre títulos y fotos</h3>
+          <p>En <span class="code-pill">/conocenos/</span> y en las páginas de servicios (<span class="code-pill">/lineas-de-expresion/</span>, <span class="code-pill">/ojeras/</span>, <span class="code-pill">/relleno-de-menton/</span>), un logotipo vertical flotante cae directamente encima de los títulos y corta las fotos de Antes y Después.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Texto blanco sobre fondo crema ilegible</h3>
+          <p>En la sección de <strong>Aparatología</strong> de la página principal, el encabezado blanco y su descripción están puestos sobre un fondo beige claro, haciendo que el texto desaparezca.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Botón de WhatsApp encimado con botón de subida</h3>
+          <p>En la esquina inferior derecha, el widget flotante de WhatsApp tapa parcialmente el botón de regresar arriba (<em>scroll to top</em>).</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Carrusel de resultados clonado sin limpiar</h3>
+          <p>Todas las tarjetas de <em>"¡Resultados sin cirugías!"</em> fueron duplicadas en Elementor dejando oculto el texto <span class="code-pill">"Aumento de labios"</span> incluso en fotos de nariz, mentón, toxina y glúteos.</p>
+        </div>
+      </div>
+
+      <div class="improve-box">
+        <h4>✦ Puntos para Mejorar (Implementados en el Prototipo)</h4>
+        <ul class="improve-list">
+          <li>Reemplazar los 46 PNGs de botones por componentes HTML/CSS reales con micro-animaciones, nitidez Retina y carga instantánea.</li>
+          <li>Rediseñar el Hero principal con estética editorial de clínica de lujo, video limpio sin bloques negros y llamados a la acción claros.</li>
+          <li>Corregir toda la jerarquía de capas (<code>z-index</code>) con una barra de navegación fija en vidrio esmerilado (<em>glassmorphism</em>).</li>
+          <li>Estandarizar el contraste tipográfico AA/AAA combinando fondos oscuros profundos y marfil cálido con acentos en oro champagne y rosa malva.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. UX Y CONVERSIÓN -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">2. Fallas de Experiencia de Usuario y Conversión (UX)</h2>
+        <span class="tag-count">7 Fallos Críticos</span>
+      </div>
+      <div class="issues-grid">
+        <div class="issue-card">
+          <h3>✕ Enlace roto (Error 404) en portada</h3>
+          <p>El botón de <strong>Bruxismo</strong> en la página de inicio apunta a <span class="code-pill">/broxismo/</span> (escrito con "o"), llevando al paciente a una pantalla de error 404.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Páginas con "Lorem Ipsum" abiertas al público</h3>
+          <p>La URL <span class="code-pill">/lead-magnet-guia-gratuita/</span> está publicada con <em>"Añade aquí tu texto de cabecera"</em> y <em>"Lorem ipsum..."</em>. Además, <span class="code-pill">/sample-page/</span> sigue activa y <span class="code-pill">/cont/</span> tiene el título cortado como <em>"Cont"</em>.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Cero formularios en Contacto y script de Kommo roto</h3>
+          <p>La página <span class="code-pill">/contacto/</span> no tiene ningún formulario. En consola se dispara el error <span class="code-pill">Uncaught TypeError: Cannot read properties of null</span> en <span class="code-pill">amoforms.js</span>.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Testimonios ocultos y con "Designation" sin editar</h3>
+          <p>Las reseñas reales de clientes no están en la página principal, y donde aparecen (<span class="code-pill">/promociones/</span>) todas dicen <span class="code-pill">Designation</span> debajo del nombre porque nunca cambiaron el texto de relleno del plugin.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Errores de ortografía en URLs y títulos</h3>
+          <p>URL y título escritos como <span class="code-pill">/contorno-mandubular/</span> ("mandubular"), <span class="code-pill">"en de pilación láser"</span> separado, <span class="code-pill">"piensan de nosostros"</span> y en Blogs los 4 artículos tienen pegado exactamente el mismo párrafo repetido.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Sin cotizador ni filtro rápido de tratamientos</h3>
+          <p>Con más de 35 procedimientos divididos en botones estáticos, el paciente no puede filtrar ni armar una solicitud de valoración personalizada antes de saltar a WhatsApp.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Redes sociales y enlaces internos contradictorios</h3>
+          <p>Mezcla dos cuentas de Instagram distintas (<span class="code-pill">@naramedspa</span> y <span class="code-pill">@nara_medspa</span>), enlaces con <span class="code-pill">http://www.</span> en Sueroterapia y un botón del menú que manda a <span class="code-pill">/category/uncategorized/</span>.</p>
+        </div>
+      </div>
+
+      <div class="improve-box">
+        <h4>✦ Puntos para Mejorar (Implementados en el Prototipo)</h4>
+        <ul class="improve-list">
+          <li>Incorporar un <strong>Asistente / Agendador Interactivo de Valoración</strong> que pre-arma el mensaje de WhatsApp con el tratamiento exacto, zona y horario preferido del paciente.</li>
+          <li>Organizar el catálogo completo en pestañas interactivas con buscador y filtros (Medicina Estética, Aparatología, Sueroterapia IV y Cosmetología).</li>
+          <li>Destacar los 5 testimonios reales verificados directamente en la portada con el tratamiento realizado (sin textos basura como <em>"Designation"</em>).</li>
+          <li>Agregar una galería interactiva de casos reales de Antes y Después con filtros por procedimiento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. SEO Y RENDIMIENTO -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">3. Fallas de Posicionamiento en Google (SEO) y Código</h2>
+        <span class="tag-count">7 Fallos Críticos</span>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 14px;">
+        <strong>Evidencia de páginas clonadas con el título SEO equivocado:</strong> Al duplicar páginas en Elementor sin cambiar el etiqueta <code>&lt;title&gt;</code>, Google indexa páginas con el nombre de otro tratamiento completamente distinto:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>URL de la Página</th>
+            <th>Tratamiento Real de la Página</th>
+            <th>Título SEO Equivocado que ve Google (<code>&lt;title&gt;</code>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="code-pill">/faciales/</span></td>
+            <td>Limpiezas Faciales (Cosmetología)</td>
+            <td>❌ <strong>Aumento de labios – Nara Med Spa</strong></td>
+          </tr>
+          <tr>
+            <td><span class="code-pill">/hifu/</span></td>
+            <td>Ultraformer HIFU (Aparatología)</td>
+            <td>❌ <strong>Zeus – Nara Med Spa</strong></td>
+          </tr>
+          <tr>
+            <td><span class="code-pill">/adn-de-salmon-facial/</span></td>
+            <td>ADN de Salmón Facial (PDRN)</td>
+            <td>❌ <strong>Levantamiento facial – Nara Med Spa</strong></td>
+          </tr>
+          <tr>
+            <td><span class="code-pill">/nutricion-y-elasticidad-facial/</span></td>
+            <td>Skinbooster Ácido Hialurónico</td>
+            <td>❌ <strong>ADN de salmon facial – Nara Med Spa</strong></td>
+          </tr>
+          <tr>
+            <td><span class="code-pill">/relleno-de-gluteos/</span></td>
+            <td>Relleno de Glúteos sin Cirugía</td>
+            <td>❌ <strong>Sudoración excesiva – Nara Med Spa</strong></td>
+          </tr>
+          <tr>
+            <td><span class="code-pill">/eliminacion-de-verrugas/</span></td>
+            <td>Eliminación de Verrugas con Plasma</td>
+            <td>❌ <strong>Despigmentante manchas difíciles – Nara Med Spa</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="issues-grid">
+        <div class="issue-card">
+          <h3>✕ Ausencia total de <code>&lt;h1&gt;</code> y Meta Description</h3>
+          <p>Ni la Home, ni Conócenos, ni Contacto tienen etiqueta <code>&lt;h1&gt;</code> ni <code>&lt;meta name="description"&gt;</code>, dejando a Google sin estructura principal para posicionar en Tijuana.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ 100% de imágenes con <code>alt=""</code> vacío</h3>
+          <p>Las 92 imágenes de la página principal carecen de texto alternativo descriptivo, perdiendo posicionamiento orgánico en búsqueda visual de tratamientos en Tijuana.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Párrafos enteros etiquetados como <code>&lt;h2&gt;</code></h3>
+          <p>Las biografías del equipo y listas de beneficios están metidas dentro de etiquetas <code>&lt;h2&gt;</code> mientras que los títulos de sección están en <code>&lt;h5&gt;</code>, rompiendo la semántica HTML.</p>
+        </div>
+        <div class="issue-card">
+          <h3>✕ Sobrecarga de +30 hojas CSS y PNGs gigantes</h3>
+          <p>El sitio carga más de 30 archivos CSS distintos de plugins y fotografías PNG sin comprimir de hasta 2048px, penalizando los Core Web Vitals en dispositivos móviles.</p>
+        </div>
+      </div>
+
+      <div class="improve-box">
+        <h4>✦ Puntos para Mejorar (Implementados en el Prototipo)</h4>
+        <ul class="improve-list">
+          <li>Estructura semántica HTML5 impecable con un único <code>&lt;h1&gt;</code> optimizado para <em>"Medicina Estética, Aparatología y Cosmetología en Zona Río, Tijuana"</em>.</li>
+          <li>Integración de Datos Estructurados <strong>Schema.org JSON-LD (<code>MedicalClinic</code>)</strong> con dirección en Torre Norte Consultorio 505, Cédula Profesional 11777648, COFEPRIS, horarios y catálogo de tratamientos.</li>
+          <li>Todas las fotografías reales etiquetadas con atributos <code>alt</code> descriptivos, carga diferida (<code>loading="lazy"</code>) y diseño 100% responsivo sin dependencias pesadas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <div>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; margin-bottom: 6px;">¿Listo para ver el cambio?</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">El prototipo nuevo utiliza todas las fotos reales, videos, equipo médico y tratamientos de Nara Med Spa con diseño y SEO de primer nivel.</p>
+      </div>
+      <a href="index.html" class="btn-proto">Abrir Nuevo Prototipo de Nara Med Spa →</a>
+    </div>
+  </div>
+</body>
+</html>

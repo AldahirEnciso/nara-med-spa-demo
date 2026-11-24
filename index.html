@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nara Med Spa | Medicina Estética, Simulador Facial y Sueroterapia en Zona Río, Tijuana</title>
+  <meta name="description" content="Clínica de Medicina Estética, Aparatología Avanzada, Sueroterapia IV y Cosmetología en Zona Río, Tijuana. Dra. Stephanie Flores (Céd. Prof. 11777648). Prueba nuestro simulador facial y calculadora de paquetes." />
+  <link rel="icon" href="https://naramedspa.com/wp-content/uploads/2024/10/Diseno-sin-titulo-16.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-ivory: #FAF6F3;
+      --bg-blush: #F3E9E6;
+      --bg-dark: #140F11;
+      --bg-dark-card: #1F171A;
+      --rose-primary: #BF8A8E;
+      --rose-deep: #965358;
+      --terracotta: #BC5D54;
+      --gold: #C9A46A;
+      --gold-light: #E6C994;
+      --text-main: #1D1618;
+      --text-muted: #65585B;
+      --text-light: #F9F5F2;
+      --border-soft: rgba(191, 138, 142, 0.25);
+      --border-gold: rgba(201, 164, 106, 0.38);
+      --shadow-lux: 0 20px 50px rgba(29, 22, 24, 0.08);
+      --shadow-hover: 0 28px 65px rgba(150, 83, 88, 0.18);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-ivory);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+
+    /* BARRA DE PROGRESO DE LECTURA */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose-primary), var(--gold), #fff);
+      width: 0%;
+      z-index: 99999;
+      transition: width 0.1s ease;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: #0d090a;
+      color: #e9dfd9;
+      font-size: 0.79rem;
+      padding: 9px 24px;
+      border-bottom: 1px solid rgba(201, 164, 106, 0.22);
+    }
+    .topbar-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .topbar-badges { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .topbar-badges span { display: inline-flex; align-items: center; gap: 6px; }
+    .gold-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; box-shadow: 0 0 8px var(--gold); }
+    .topbar-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .topbar-links a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+
+    /* NAVBAR + MEGA MENU CON PUENTE INVISIBLE (NUNCA SE CIERRA AL MOVER EL MOUSE) */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 3000;
+      background: rgba(20, 15, 17, 0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(201, 164, 106, 0.3);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+    }
+    .nav-container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+    }
+    .brand-logo { display: flex; align-items: center; text-decoration: none; padding: 10px 0; }
+    .brand-logo img { height: 50px; width: auto; object-fit: contain; transition: transform 0.3s ease; }
+    .brand-logo:hover img { transform: scale(1.04); }
+    .nav-links {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      list-style: none;
+      min-height: 76px;
+    }
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .nav-item.has-mega { position: static; }
+    .nav-link {
+      text-decoration: none;
+      color: #f6efec;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 24px 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--gold-light); }
+    .nav-caret { font-size: 0.7rem; transition: transform 0.25s ease; color: var(--gold); }
+    .has-mega.open .nav-caret, .nav-item.dropdown-open .nav-caret { transform: rotate(180deg); }
+
+    /* MEGA MENU PANEL CON PUENTE INVISIBLE Y RETARDO DE CIERRE */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 24px;
+      right: 24px;
+      width: auto;
+      max-width: 1292px;
+      margin: 0 auto;
+      transform: translateY(8px);
+      background: #171113;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 0 0 22px 22px;
+      padding: 26px;
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.88);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+      z-index: 9999;
+    }
+    /* Puente invisible de 24px hacia arriba para que el mouse jamás pierda el foco */
+    .mega-menu::before {
+      content: "";
+      position: absolute;
+      top: -24px;
+      left: 0;
+      right: 0;
+      height: 26px;
+      background: transparent;
+    }
+    .has-mega.open .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0px);
+    }
+    .mega-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .mega-col {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 16px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .mega-col:hover {
+      border-color: rgba(201, 164, 106, 0.45);
+      background: rgba(255, 255, 255, 0.045);
+    }
+    .mega-col-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(201, 164, 106, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+    }
+    .mega-col-title:hover { color: #fff; }
+    .mega-subhead {
+      font-size: 0.71rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--rose-primary);
+      font-weight: 800;
+      margin: 10px 0 6px;
+      display: block;
+    }
+    .mega-list { list-style: none; }
+    .mega-list li { margin-bottom: 5px; }
+    .mega-list a {
+      color: #dfd4d6;
+      text-decoration: none;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: all 0.18s ease;
+    }
+    .mega-list a:hover {
+      color: var(--gold-light);
+      background: rgba(201, 164, 106, 0.14);
+      transform: translateX(4px);
+    }
+    .mega-footer {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* DROPDOWN SIMPLE PARA ANTES Y DESPUÉS CON PUENTE INVISIBLE */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 295px;
+      background: #171113;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 0 0 16px 16px;
+      padding: 14px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+      z-index: 9999;
+      list-style: none;
+    }
+    .dropdown-menu::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 22px;
+      background: transparent;
+    }
+    .nav-item.dropdown-open .dropdown-menu,
+    .nav-item.has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0px);
+    }
+    .dropdown-menu li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      color: #e9dfe1;
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu li a:hover {
+      background: rgba(201, 164, 106, 0.16);
+      color: var(--gold-light);
+    }
+
+    /* BOTONES CON EFECTO SHIMMER */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.89rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+    }
+    .btn:hover::after { left: 140%; }
+    .btn-primary {
+      background: linear-gradient(135deg, #b8777c 0%, #8e4c51 100%);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(150, 83, 88, 0.32);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 32px rgba(150, 83, 88, 0.45); }
+    .btn-gold {
+      background: linear-gradient(135deg, #d7b47c 0%, #b0884a 100%);
+      color: #161113;
+      box-shadow: 0 10px 25px rgba(201, 164, 106, 0.3);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(201, 164, 106, 0.48); }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      border: 1.5px solid var(--rose-primary);
+    }
+    .btn-outline:hover { background: var(--rose-deep); color: #fff; border-color: var(--rose-deep); }
+
+    /* COMPONENTES GENERALES */
+    .section { padding: 84px 24px; position: relative; }
+    .container { max-width: 1320px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 15px;
+      border-radius: 999px;
+      background: rgba(191, 138, 142, 0.16);
+      border: 1px solid rgba(191, 138, 142, 0.4);
+      color: var(--rose-deep);
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-head {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 48px;
+    }
+    .section-head h1, .section-head h2 {
+      font-size: clamp(2.1rem, 3.6vw, 3.3rem);
+      line-height: 1.12;
+      margin-bottom: 14px;
+    }
+    .section-head p { color: var(--text-muted); font-size: 1.02rem; }
+
+    /* HERO SUBPÁGINAS */
+    .page-hero {
+      background: radial-gradient(circle at top right, #2e1f23 0%, #140f11 70%);
+      color: #fff;
+      padding: 68px 24px 74px;
+      border-bottom: 1px solid var(--border-gold);
+      position: relative;
+      overflow: hidden;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: #d8c8ca; text-decoration: none; }
+    .breadcrumb a:hover { color: var(--gold-light); }
+
+    /* TARJETAS Y GRIDS CON ANIMACIÓN TILT / HOVER */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 26px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-lux);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--gold);
+    }
+    .card-img {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+      background: #1e1618;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s ease;
+    }
+    .card:hover .card-img img { transform: scale(1.07); }
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(20, 15, 17, 0.86);
+      color: var(--gold-light);
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201,164,106,0.4);
+    }
+    .card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+    .card-body h3 { font-size: 1.5rem; margin-bottom: 8px; line-height: 1.2; color: var(--text-main); }
+    .card-body p { font-size: 0.91rem; color: var(--text-muted); margin-bottom: 16px; flex: 1; }
+
+    /* =======================================================================
+       WIDGET 1: DESLIZADOR INTERACTIVO ANTES / DESPUÉS REAL (SEPARA ANTES ARRIBA Y DESPUÉS ABAJO EN 2 CAPAS SUPERPUESTAS)
+       ======================================================================= */
+    .ba-interactive-wrap {
+      background: #171113;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 26px;
+      padding: 32px;
+      color: #fff;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.28);
+    }
+    .ba-stage-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .ba-drag-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      max-height: 430px;
+      border-radius: 20px;
+      overflow: hidden;
+      user-select: none;
+      background: #0d0a0b;
+      border: 2px solid rgba(201,164,106,0.55);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    }
+    .ba-layer-after, .ba-layer-before {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    /* Las fotos Beforeafter_*.png de Nara tienen la mitad superior = ANTES y la mitad inferior = DESPUÉS.
+       Con height:200% mostramos exactamente la mitad inferior en la capa DESPUÉS y la mitad superior en la capa ANTES,
+       para que al arrastrar la barra horizontalmente se transforme de verdad el ANTES en el DESPUÉS real */
+    .ba-layer-after img {
+      position: absolute;
+      top: -96%;
+      left: 0;
+      width: 100%;
+      height: 196%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+    .ba-layer-before {
+      clip-path: inset(0 50% 0 0);
+    }
+    .ba-layer-before img {
+      position: absolute;
+      top: 0%;
+      left: 0;
+      width: 100%;
+      height: 196%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+    .ba-divider-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: var(--gold-light);
+      box-shadow: 0 0 15px rgba(201,164,106,0.9);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 5;
+    }
+    .ba-handle-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e6c994, #b0884a);
+      color: #140f11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.55);
+      border: 3px solid #fff;
+      pointer-events: none;
+      z-index: 6;
+    }
+    .ba-range-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+    .ba-tag-pill {
+      position: absolute;
+      top: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .ba-tag-left { left: 14px; background: rgba(20,15,17,0.85); color: #e2d5d7; border: 1px solid rgba(255,255,255,0.2); }
+    .ba-tag-right { right: 14px; background: rgba(201,164,106,0.92); color: #140f11; }
+
+    /* =======================================================================
+       WIDGET 2: SIMULADOR Y MAPA FACIAL INTERACTIVO (HOTSPOTS ANATÓMICOS)
+       ======================================================================= */
+    .face-simulator-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 38px;
+      align-items: center;
+      background: #fff;
+      border: 1.5px solid var(--border-soft);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: var(--shadow-lux);
+    }
+    .face-map-stage {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #271b1e 0%, #140f11 100%);
+      aspect-ratio: 4 / 4.5;
+      border: 2px solid var(--border-gold);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.22);
+    }
+    .face-map-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0.92;
+      transition: transform 0.6s ease;
+    }
+    .hotspot-pin {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #140f11;
+      border: 2.5px solid #fff;
+      font-weight: 800;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: all 0.25s ease;
+      z-index: 5;
+    }
+    .hotspot-pin::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-light);
+      animation: pulsePin 2s infinite;
+    }
+    .hotspot-pin:hover, .hotspot-pin.active {
+      background: var(--rose-deep);
+      color: #fff;
+      transform: translate(-50%, -50%) scale(1.22);
+      z-index: 8;
+    }
+    @keyframes pulsePin {
+      0% { transform: scale(0.85); opacity: 0.9; }
+      100% { transform: scale(1.55); opacity: 0; }
+    }
+
+    /* =======================================================================
+       WIDGET 3: CALCULADORA DE PAQUETES, VALOR Y AHORRO VS SAN DIEGO / CIRUGÍA
+       ======================================================================= */
+    .calc-box {
+      background: radial-gradient(circle at top right, #2b1d21 0%, #140f11 75%);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 28px;
+      padding: 40px;
+      color: #fff;
+      box-shadow: 0 28px 75px rgba(0,0,0,0.35);
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: start;
+    }
+    .treat-toggle-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .treat-check-card {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .treat-check-card:hover {
+      border-color: rgba(201,164,106,0.5);
+      background: rgba(255,255,255,0.08);
+    }
+    .treat-check-card.selected {
+      background: linear-gradient(135deg, rgba(201,164,106,0.22), rgba(191,138,142,0.18));
+      border-color: var(--gold-light);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    .calc-summary-panel {
+      background: #1d1518;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 22px;
+      padding: 28px;
+      position: sticky;
+      top: 100px;
+    }
+
+    /* ANIMACIONES DE SCROLL REVEAL */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-up.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MODAL LIGHTBOX */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 8, 9, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-content {
+      max-width: 1020px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #1a1315;
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      position: relative;
+      padding: 28px;
+      color: #fff;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+    }
+    .modal-close {
+      position: sticky;
+      top: 6px;
+      float: right;
+      z-index: 10;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0d090a;
+      color: #cfc3c5;
+      padding: 70px 24px 36px;
+      border-top: 1px solid rgba(201, 164, 106, 0.25);
+    }
+    .footer-grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1.1fr;
+      gap: 34px;
+      margin-bottom: 44px;
+    }
+    .footer-col h4 { font-size: 1.4rem; color: #fff; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 9px; font-size: 0.87rem; }
+    .footer-col a { color: #cfc3c5; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2900;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 14px 32px rgba(37, 211, 102, 0.38);
+      transition: transform 0.25s ease;
+    }
+    .wa-float:hover { transform: translateY(-4px); }
+
+    @media (max-width: 1040px) {
+      .mega-grid, .ba-stage-grid, .face-simulator-grid, .calc-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
+      .mega-grid, .footer-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <!-- Topbar de Credenciales Médicas -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-badges">
+        <span><i class="gold-dot"></i> Torre Norte, Consultorio 505 · Zona Río, Tijuana, B.C.</span>
+        <span><i class="gold-dot"></i> Dra. Stephanie Flores · Céd. Prof. 11777648</span>
+        <span><i class="gold-dot"></i> Productos Certificados por COFEPRIS</span>
+      </div>
+      <div class="topbar-links">
+        <span>Lun – Sáb: 9:00 A.M. – 5:00 P.M.</span>
+        <a href="tel:+526632061157">📞 +52 663 206 1157</a>
+        <a href="auditoria.html" style="background: rgba(255,77,94,0.2); color: #ff9aa3; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(255,77,94,0.4);">Ver Diagnóstico Web Actual</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Navegación con Mega-Menú Desplegable (Con puente anti-cierre y delay de 350ms) -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Nara Med Spa Inicio">
+        <img src="https://naramedspa.com/wp-content/uploads/2024/09/Nara_logo_horizontal_gold.png" alt="Logotipo oficial Nara Med Spa Tijuana" />
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active">Inicio</a>
+          </li>
+
+          <!-- MEGA-MENÚ DESPLEGABLE DE TODOS LOS SERVICIOS -->
+          <li class="nav-item has-mega" id="megaTrigger">
+            <button type="button" class="nav-link " id="megaBtn" aria-expanded="false">
+              Servicios y Tratamientos <span class="nav-caret">▼</span>
+            </button>
+            <div class="mega-menu" id="megaPanel" role="region" aria-label="Todos los servicios de Nara Med Spa">
+              <div class="mega-grid">
+                <!-- Columna 1: Rejuvenecimiento y Toxina -->
+                <div class="mega-col">
+                  <a href="servicio-toxina-botulinica.html" class="mega-col-title">Rejuvenecimiento <span>→</span></a>
+                  <span class="mega-subhead">Medicina Estética</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-toxina-botulinica.html">✦ Líneas de expresión (Botox)</a></li>
+                    <li><a href="servicio-toxina-botulinica.html#baby-botox">✦ Baby Botox Preventivo</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html">✦ Bioestimulación de Colágeno</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#hilos-pdo">✦ Hilos Tensores PDO (Lifting)</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#pdrn">✦ ADN de Salmón Facial (PDRN)</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#colageno">✦ Nutrición Facial (Skinbooster)</a></li>
+                  </ul>
+                  <span class="mega-subhead">Toxina Terapéutica</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-toxina-botulinica.html#bruxismo">✦ Bruxismo (Afinamiento)</a></li>
+                    <li><a href="servicio-toxina-botulinica.html#sonrisa-gingival">✦ Sonrisa Gingival</a></li>
+                    <li><a href="servicio-toxina-botulinica.html#hiperhidrosis">✦ Sudoración Excesiva</a></li>
+                  </ul>
+                </div>
+
+                <!-- Columna 2: Rellenos Faciales y Contorno de Ojos -->
+                <div class="mega-col">
+                  <a href="servicio-labios.html" class="mega-col-title">Rellenos y Armonía <span>→</span></a>
+                  <span class="mega-subhead">Ácido Hialurónico</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-labios.html">✦ Aumento y Diseño de Labios</a></li>
+                    <li><a href="servicio-rinomodelacion.html">✦ Rinomodelación sin Cirugía</a></li>
+                    <li><a href="servicio-armonizacion-facial.html">✦ Armonización Facial Completa</a></li>
+                    <li><a href="servicio-armonizacion-facial.html#mandibula">✦ Contorno Mandibular</a></li>
+                    <li><a href="servicio-armonizacion-facial.html#pomulos">✦ Relleno de Pómulos</a></li>
+                    <li><a href="servicio-armonizacion-facial.html#menton">✦ Relleno y Proyección de Mentón</a></li>
+                  </ul>
+                  <span class="mega-subhead">Contorno de Ojos</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#ojeras">✦ Corrección de Ojeras</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#pdrn-ojos">✦ Líneas Finas Periocular</a></li>
+                    <li><a href="servicio-pdrn-rejuvenecimiento.html#pdrn-ojos">✦ ADN de Salmón en Ojos</a></li>
+                  </ul>
+                </div>
+
+                <!-- Columna 3: Piel y Procedimientos Corporales -->
+                <div class="mega-col">
+                  <a href="servicio-piel-corporal.html" class="mega-col-title">Piel y Corporal <span>→</span></a>
+                  <span class="mega-subhead">Dermatología Estética</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-piel-corporal.html#acne">✦ Control Clínico de Acné</a></li>
+                    <li><a href="servicio-piel-corporal.html#melasma">✦ Despigmentante / Melasma</a></li>
+                    <li><a href="servicio-piel-corporal.html#acne">✦ Control de Piel Grasa y Poros</a></li>
+                    <li><a href="servicio-piel-corporal.html#cuello-manos">✦ Enzimas Reafirmantes</a></li>
+                    <li><a href="servicio-piel-corporal.html#cuello-manos">✦ Eliminación de Verrugas</a></li>
+                    <li><a href="servicio-piel-corporal.html#cuello-manos">✦ Control de Caída de Cabello</a></li>
+                  </ul>
+                  <span class="mega-subhead">Médico Corporal</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-piel-corporal.html#gluteos">✦ Relleno de Glúteos sin Cirugía</a></li>
+                    <li><a href="servicio-piel-corporal.html#tirzepatida">✦ Quemador de Grasa (Enzimas)</a></li>
+                    <li><a href="servicio-piel-corporal.html#tirzepatida">✦ Control de Peso (Tirzepatida)</a></li>
+                    <li><a href="servicio-piel-corporal.html#varices">✦ Eliminación de Várices</a></li>
+                    <li><a href="servicio-piel-corporal.html#cuello-manos">✦ Rejuvenecimiento Cuello y Manos</a></li>
+                  </ul>
+                </div>
+
+                <!-- Columna 4: Aparatología y Cosmetología -->
+                <div class="mega-col">
+                  <a href="servicio-aparatologia.html" class="mega-col-title">Aparatología <span>→</span></a>
+                  <span class="mega-subhead">Tecnología Médica</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-aparatologia.html#hifu">✦ Ultraformer (HIFU Lifting)</a></li>
+                    <li><a href="servicio-aparatologia.html#co2">✦ Láser CO2 Fraccionado</a></li>
+                    <li><a href="servicio-aparatologia.html#zeus">✦ Zeus (Microagujas + RF)</a></li>
+                    <li><a href="servicio-aparatologia.html#soprano">✦ Depilación Soprano Titanium</a></li>
+                  </ul>
+                  <span class="mega-subhead">Cosmetología Clínica</span>
+                  <ul class="mega-list">
+                    <li><a href="servicio-cosmetologia.html#faciales">✦ Limpiezas Faciales Profundas</a></li>
+                    <li><a href="servicio-cosmetologia.html#masajes">✦ Masajes Manuales Terapéuticos</a></li>
+                    <li><a href="servicio-cosmetologia.html#corporales">✦ Tratamientos Corporales Moldeo</a></li>
+                  </ul>
+                </div>
+
+                <!-- Columna 5: Servicio Destacado Sueroterapia IV -->
+                <div class="mega-col" style="background: linear-gradient(160deg, rgba(201,164,106,0.16), rgba(191,138,142,0.12)); border-color: rgba(201,164,106,0.4);">
+                  <a href="sueroterapia.html" class="mega-col-title">★ Sueroterapia IV <span>→</span></a>
+                  <span class="mega-subhead">Servicio Destacado</span>
+                  <ul class="mega-list">
+                    <li><a href="sueroterapia.html#nad">💧 Suero NAD+ (Longevidad)</a></li>
+                    <li><a href="sueroterapia.html#glutation">💧 Glutatión (Detox y Piel)</a></li>
+                    <li><a href="sueroterapia.html#biodefense">💧 Biodefense (Inmunidad)</a></li>
+                    <li><a href="sueroterapia.html#stress-relief">💧 Stress Relief (Antifatiga)</a></li>
+                    <li><a href="sueroterapia.html#power-boost">💧 Power Boost (Energía)</a></li>
+                    <li><a href="sueroterapia.html#anti-aging">💧 Anti Aging (Regenerador)</a></li>
+                    <li><a href="sueroterapia.html#anti-aging">💧 Megadosis Vitamina C</a></li>
+                  </ul>
+                  <a href="sueroterapia.html" class="btn btn-gold" style="width: 100%; margin-top: 12px; padding: 9px 14px; font-size: 0.78rem;">Ver Lounge de Sueros →</a>
+                </div>
+              </div>
+
+              <div class="mega-footer">
+                <span style="font-size: 0.84rem; color: #cbbec0;">✨ Prueba nuestro <strong>Simulador Facial Interactivo</strong> y la <strong>Calculadora de Paquetes</strong> en la página de inicio.</span>
+                <div style="display: flex; gap: 12px;">
+                  <a href="index.html#simulador-facial" class="btn btn-outline" style="padding: 8px 18px; font-size: 0.8rem;">Abrir Simulador Facial</a>
+                  <a href="index.html#calculadora-paquetes" class="btn btn-gold" style="padding: 8px 18px; font-size: 0.8rem;">Cotizar Paquete y Ahorro →</a>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- DROPDOWN DE ÁLBUMES DE ANTES Y DESPUÉS -->
+          <li class="nav-item has-dropdown" id="baDropdownTrigger">
+            <a href="antes-y-despues.html" class="nav-link ">
+              Antes y Después <span class="nav-caret">▼</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="antes-y-despues.html#album-labios">Aumento de Labios <span>10 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-rinomodelacion">Rinomodelación sin Cirugía <span>10 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-toxina">Toxina Botulínica (Botox) <span>6 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-armonizacion">Armonización y Mandíbula <span>7 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-ojeras">Ojeras y ADN de Salmón <span>6 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-bioestimulacion">Hilos PDO, Colágeno y HIFU <span>7 fotos</span></a></li>
+              <li><a href="antes-y-despues.html#album-piel_corporal">Acné, Manchas, Várices y Glúteos <span>9 fotos</span></a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="sueroterapia.html" class="nav-link " style="color: var(--gold-light);">★ Sueroterapia IV</a>
+          </li>
+          <li class="nav-item">
+            <a href="conocenos.html" class="nav-link ">Quiénes Somos</a>
+          </li>
+          <li class="nav-item">
+            <a href="blog.html" class="nav-link ">Blog Médico</a>
+          </li>
+          <li class="nav-item">
+            <a href="contacto.html" class="nav-link ">Ubicación y Contacto</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="contacto.html#agendar" class="btn btn-gold">Agendar Cita</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- HERO PRINCIPAL CON ANIMACIONES Y ACCESO RÁPIDO A SIMULADORES -->
+  <section style="padding: 58px 24px 76px; background: radial-gradient(circle at 85% 15%, rgba(191, 138, 142, 0.25) 0%, transparent 45%), linear-gradient(180deg, #faf6f3 0%, #f3e7e3 100%);">
+    <div class="container" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:44px;align-items:center;">
+      <div class="reveal-up in-view">
+        <div class="eyebrow">✦ Clínica de Medicina Estética y Cosmetología · Zona Río, Tijuana</div>
+        <h1 style="font-size:clamp(2.5rem, 4.6vw, 4.2rem);line-height:1.06;margin-bottom:18px;">Tu belleza en <em style="color:var(--rose-deep);">manos médicas expertas</em>, resultados sin cirugía.</h1>
+        <p style="font-size:1.05rem;color:var(--text-muted);margin-bottom:26px;max-width:590px;">
+          Exterioriza tu belleza interior en Torre Norte, Zona Río. Experimenta abajo nuestro <strong>Simulador Facial Interactivo</strong>, arrastra el <strong>Escáner de Antes y Después</strong> o arma tu paquete con ahorro frente a precios de San Diego y cirugía.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+          <a href="#simulador-facial" class="btn btn-primary">Probar Simulador Facial Interactivo →</a>
+          <a href="#calculadora-paquetes" class="btn btn-gold">Calculadora de Paquetes y Costos</a>
+          <a href="#resultados" class="btn btn-outline">Comparador Antes / Después ⇄</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:22px;border-top:1px solid var(--border-soft);">
+          <div>
+            <strong class="serif" style="font-size:2rem;color:var(--rose-deep);display:block;line-height:1;">+35</strong>
+            <span style="font-size:0.8rem;color:var(--text-muted);font-weight:600;">Tratamientos Faciales y Corporales</span>
+          </div>
+          <div>
+            <strong class="serif" style="font-size:2rem;color:var(--rose-deep);display:block;line-height:1;">65% Ahorro</strong>
+            <span style="font-size:0.8rem;color:var(--text-muted);font-weight:600;">Vs. Clínicas en San Diego / California</span>
+          </div>
+          <div>
+            <strong class="serif" style="font-size:2rem;color:var(--rose-deep);display:block;line-height:1;">COFEPRIS</strong>
+            <span style="font-size:0.8rem;color:var(--text-muted);font-weight:600;">Céd. Prof. 11777648 · Zona Río</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Oficial de Bienvenida Con Poster Interactivo (Nunca bloquea el Mega-Menú) -->
+      <div class="reveal-up in-view" style="background:#161012;border-radius:26px;overflow:hidden;border:3px solid #fff;box-shadow:0 28px 65px rgba(29,22,24,0.22);position:relative;z-index:1;">
+        <div id="heroVideoBox" style="position:relative;aspect-ratio:16/10;background:#0e0a0b;cursor:pointer;overflow:hidden;" onclick="this.innerHTML='<iframe src=\'https://player.vimeo.com/video/1009728451?autoplay=1&color=C9A46A&title=0&portrait=0&byline=0\' style=\'position:absolute;inset:0;width:100%;height:100%;border:0;\' allow=\'autoplay; fullscreen; picture-in-picture\' allowfullscreen></iframe>'">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/10/GRUPAL2.png" alt="Equipo Médico Nara Med Spa Tijuana" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);" />
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,17,0.1) 30%,rgba(20,15,17,0.88) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+            <div style="display:inline-flex;align-items:center;gap:12px;background:rgba(201,164,106,0.95);color:#140f11;padding:12px 22px;border-radius:999px;font-weight:800;font-size:0.9rem;width:fit-content;margin-bottom:10px;box-shadow:0 12px 28px rgba(0,0,0,0.4);">
+              <span>▶</span> <span>Reproducir Video Oficial de Nara Med Spa</span>
+            </div>
+            <span style="color:#e9dfe1;font-size:0.85rem;">Haz clic para reproducir el recorrido por nuestra clínica en Zona Río</span>
+          </div>
+        </div>
+        <div style="padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:#fff;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/10/Sin-titulo-1_0010_Foto-Dra.-Steph-1.png" alt="Dra. Stephanie Flores" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);" />
+            <div>
+              <strong style="display:block;font-size:0.95rem;">Dra. Stephanie Flores · Directora Médica</strong>
+              <span style="font-size:0.78rem;color:var(--gold-light);">Maestría en Medicina Estética y Regenerativa · Céd. 11777648</span>
+            </div>
+          </div>
+          <a href="conocenos.html" style="color:var(--gold-light);font-size:0.84rem;font-weight:700;text-decoration:none;">Conocer al Equipo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       SUPER-WIDGET INTERACTIVO 1: MAPA ANATÓMICO FACIAL Y CORPORAL EN TIEMPO REAL
+       ======================================================================= -->
+  <section class="section" id="simulador-facial">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="eyebrow">✦ Diagnóstico Interactivo en Tiempo Real</div>
+        <h2>Explora Tu Rostro: Haz Clic en Cualquier Zona para Ver Qué Tratamiento Te Conviene</h2>
+        <p>Toca los puntos dorados sobre el mapa anatómico o elige una zona para ver en tiempo real qué logra el tratamiento, qué pasa si lo postergas y un caso real de Antes y Después.</p>
+      </div>
+
+      <div class="face-simulator-grid reveal-up">
+        <!-- Mapa Visual con Hotspots Pulsantes Calibrados al Rostro -->
+        <div class="face-map-stage">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/10/Sin-titulo-1_0010_Foto-Dra.-Steph-1.png" alt="Mapa Anatómico Facial Nara Med Spa" style="transform: scale(1.38); transform-origin: 50% 14%;" />
+          <div style="position:absolute;top:14px;left:14px;background:rgba(20,15,17,0.88);color:var(--gold-light);padding:6px 14px;border-radius:999px;font-size:0.75rem;font-weight:700;border:1px solid rgba(201,164,106,0.4);z-index:6;">
+            ✦ Toca un punto anatómico (1 a 7)
+          </div>
+
+          <button type="button" class="hotspot-pin active" style="top: 17%; left: 50%;" onclick="selectFaceZone('frente', this)" title="1. Frente y Entrecejo">1</button>
+          <button type="button" class="hotspot-pin" style="top: 24%; left: 42%;" onclick="selectFaceZone('ojeras', this)" title="2. Contorno de Ojos y Ojeras">2</button>
+          <button type="button" class="hotspot-pin" style="top: 27%; left: 50%;" onclick="selectFaceZone('nariz', this)" title="3. Nariz (Rinomodelación)">3</button>
+          <button type="button" class="hotspot-pin" style="top: 28%; left: 59%;" onclick="selectFaceZone('pomulos', this)" title="4. Pómulos y Piel (PDRN / HIFU)">4</button>
+          <button type="button" class="hotspot-pin" style="top: 33%; left: 50%;" onclick="selectFaceZone('labios', this)" title="5. Labios (Ácido Hialurónico)">5</button>
+          <button type="button" class="hotspot-pin" style="top: 38%; left: 59%;" onclick="selectFaceZone('mandibula', this)" title="6. Mandíbula, Mentón y Bruxismo">6</button>
+          <button type="button" class="hotspot-pin" style="top: 48%; left: 50%;" onclick="selectFaceZone('cuello', this)" title="7. Cuello, Papada y Corporal">7</button>
+        </div>
+
+        <!-- Panel Dinámico de Diagnóstico por Zona -->
+        <div id="faceZonePanel">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;" id="faceZoneButtons">
+            <button type="button" class="btn btn-gold" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('frente')">1. Frente y Arrugas</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('ojeras')">2. Ojeras y Mirada</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('nariz')">3. Nariz sin Cirugía</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('pomulos')">4. Pómulos y Piel</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('labios')">5. Labios</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('mandibula')">6. Mandíbula y Bruxismo</button>
+            <button type="button" class="btn btn-outline" style="padding:8px 14px;font-size:0.78rem;" onclick="selectFaceZone('cuello')">7. Papada y Corporal</button>
+          </div>
+
+          <div style="background:var(--bg-ivory);border:1.5px solid var(--border-gold);border-radius:22px;padding:26px;">
+            <span id="fzBadge" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;color:var(--rose-deep);letter-spacing:0.06em;">Zona 1 · Tercio Superior Facial</span>
+            <h3 id="fzTitle" style="font-size:2.1rem;margin:4px 0 10px;color:var(--text-main);">Toxina Botulínica (Botox y Baby Botox)</h3>
+            <p id="fzDesc" style="font-size:0.94rem;color:var(--text-muted);margin-bottom:18px;">
+              Relaja selectivamente los músculos de la frente, entrecejo y patas de gallo para eliminar arrugas dinámicas conservando tu expresión natural.
+            </p>
+
+            <!-- Comparativa: Hacerlo Hoy vs Postergarlo -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;">
+              <div style="background:#fff;border-left:4px solid #2e9e5b;padding:12px 14px;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,0.04);">
+                <strong style="font-size:0.8rem;color:#217a45;display:block;margin-bottom:4px;">✓ Si te lo realizas a tiempo:</strong>
+                <p id="fzDoIt" style="font-size:0.82rem;color:var(--text-main);">Piel lisa en 4 a 7 días, previenes que la piel se fracture y necesitas menos unidades a futuro.</p>
+              </div>
+              <div style="background:#fff;border-left:4px solid #d94352;padding:12px 14px;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,0.04);">
+                <strong style="font-size:0.8rem;color:#b82c3a;display:block;margin-bottom:4px;">⚠ Si lo dejas pasar:</strong>
+                <p id="fzSkipIt" style="font-size:0.82rem;color:var(--text-main);">Las líneas de expresión dinámicas quiebran la dermis y se vuelven surcos estáticos profundos más costosos de corregir.</p>
+              </div>
+            </div>
+
+            <!-- Mini caso real asociado a la zona -->
+            <div style="display:flex;align-items:center;gap:16px;background:#fff;padding:12px;border-radius:16px;border:1px solid var(--border-soft);margin-bottom:18px;">
+              <img id="fzImg" src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Toxina.png" alt="Resultado real de la zona seleccionada" style="width:88px;height:88px;border-radius:12px;object-fit:cover;" />
+              <div style="flex:1;">
+                <strong style="font-size:0.88rem;display:block;color:var(--text-main);">Evidencia Real en Nara Med Spa</strong>
+                <span id="fzPriceHint" style="font-size:0.82rem;color:var(--rose-deep);font-weight:700;display:block;margin:2px 0 6px;">Inversión estimada: $3,200 – $4,800 MXN (vs. $650 USD en San Diego)</span>
+                <button type="button" id="fzAlbumBtn" class="btn btn-outline" style="padding:6px 14px;font-size:0.76rem;" onclick="openAlbumModal('toxina', 0)">Ver Álbum Completo de Esta Zona →</button>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a id="fzPageLink" href="servicio-toxina-botulinica.html" class="btn btn-primary">Ir a la Subpágina del Tratamiento →</a>
+              <a id="fzWaLink" href="https://api.whatsapp.com/send?phone=526632061157&text=Hola%20Nara%20Med%20Spa,%20prob%C3%A9%20el%20Simulador%20Facial%20y%20me%20interesa%20Toxina%20Botul%C3%ADnica" target="_blank" rel="noopener" class="btn btn-gold">Cotizar Esta Zona por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       SUPER-WIDGET INTERACTIVO 2: COMPARADOR ARRASTRABLE + 7 ÁLBUMES DE ANTES Y DESPUÉS
+       ======================================================================= -->
+  <section class="section" style="background: var(--bg-blush);" id="resultados">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="eyebrow">✦ Interacción Manual + 55 Fotografías Clínicas Reales</div>
+        <h2>Arrastra el Comparador en Vivo o Abre los Álbumes por Procedimiento</h2>
+        <p>Desliza manualmente el control central sobre la imagen para comparar el antes y después, o haz clic en cualquiera de las 7 tarjetas inferiores para abrir su galería completa.</p>
+      </div>
+
+      
+  <!-- COMPARADOR INTERACTIVO ARRASTRABLE (DRAG SLIDER EN TIEMPO REAL) -->
+  <div class="ba-interactive-wrap reveal-up" style="margin-bottom: 48px;">
+    <div class="ba-stage-grid">
+      <div>
+        <div class="ba-drag-viewport" id="baDragViewport">
+          <!-- Imagen Resultado Final / Zoom Comparativo -->
+          <div class="ba-layer-after">
+            <img id="baSliderImgAfter" src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios.png" alt="Después del tratamiento en Nara Med Spa" />
+          </div>
+          <!-- Capa Deslizable Interactiva (Mitad Superior = ANTES REAL) -->
+          <div class="ba-layer-before" id="baLayerBefore">
+            <img id="baSliderImgBefore" src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios.png" alt="Antes del tratamiento en Nara Med Spa" />
+          </div>
+          <span class="ba-tag-pill ba-tag-left">◀ ANTES REAL</span>
+          <span class="ba-tag-pill ba-tag-right">DESPUÉS REAL ▶</span>
+          <div class="ba-divider-line" id="baDividerLine"></div>
+          <div class="ba-handle-circle" id="baHandleCircle">⇄</div>
+          <input type="range" min="5" max="95" value="50" class="ba-range-input" id="baRangeInput" aria-label="Arrastrar comparador de Antes y Después" oninput="updateBaSlider(this.value)" />
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow" style="background:rgba(201,164,106,0.18);color:var(--gold-light);border-color:rgba(201,164,106,0.4);">✦ Escáner Clínico Interactivo · Arrastra el Control ⇄</span>
+        <h3 class="serif" id="baSliderTitle" style="font-size:clamp(1.9rem,3vw,2.6rem);color:#fff;margin-bottom:10px;">Aumento y Diseño de Labios con Ácido Hialurónico</h3>
+        <p id="baSliderDesc" style="color:#d0c3c5;font-size:0.95rem;margin-bottom:20px;">
+          Mueve la barra central de izquierda a derecha sobre la fotografía para inspeccionar a detalle la simetría, hidratación y proyección lograda sin cirugía.
+        </p>
+
+        <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold-light);font-weight:700;margin-bottom:10px;">Cambia el procedimiento en el comparador en vivo:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;" id="baSliderPills">
+          <button type="button" class="btn btn-gold" style="padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('labios', 0, this)">👄 Labios Rusos</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('rinomodelacion', 0, this)">👃 Rinomodelación</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('toxina', 0, this)">✨ Botox Frente</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('armonizacion', 0, this)">💎 Marcaje Mandibular</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('ojeras', 0, this)">👁️ Relleno de Ojeras</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('bioestimulacion', 0, this)">⚡ Hilos PDO / HIFU</button>
+          <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.25);padding:8px 15px;font-size:0.8rem;" onclick="loadSliderCase('piel_corporal', 6, this)">🍑 Glúteos sin Cirugía</button>
+          
+        </div>
+
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,164,106,0.3);border-radius:16px;padding:16px 20px;margin-bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+          <div>
+            <span style="font-size:0.72rem;color:#b8aaad;display:block;">Tiempo en Consultorio</span>
+            <strong id="baMetaTime" style="color:var(--gold-light);font-size:1rem;">30 – 40 min</strong>
+          </div>
+          <div>
+            <span style="font-size:0.72rem;color:#b8aaad;display:block;">Recuperación</span>
+            <strong id="baMetaRecovery" style="color:var(--gold-light);font-size:1rem;">Inmediata (Sin reposo)</strong>
+          </div>
+          <div>
+            <span style="font-size:0.72rem;color:#b8aaad;display:block;">Duración del Efecto</span>
+            <strong id="baMetaDuration" style="color:var(--gold-light);font-size:1rem;">8 a 12 Meses</strong>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-gold" id="baOpenFullAlbumBtn" onclick="openAlbumModal('labios', 0)">Abrir las 10 Fotos de Este Álbum →</button>
+          <a href="contacto.html#agendar" class="btn btn-primary">Quiero Este Resultado</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+      <div class="grid-3">
+        
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('labios', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios.png" alt="Antes y Después Aumento y Diseño de Labios con Ácido Hialurónico en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 10 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Rellenos Faciales</span>
+            <h3>Aumento de Labios</h3>
+            <p>Perfilado natural, hidratación profunda, corrección de asimetrías y técnica de Labios Rusos con ácido hialurónico certificado por COFEPRIS.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (10 casos) →</span>
+              <a href="servicio-labios.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('rinomodelacion', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Rino.png" alt="Antes y Después Rinomodelación sin Cirugía en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 10 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Rellenos Faciales</span>
+            <h3>Rinomodelación</h3>
+            <p>Corrección de giba dorsal, elevación de punta nasal y rectificación del perfil en 30 minutos mediante ácido hialurónico de alta densidad, sin quirófano.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (10 casos) →</span>
+              <a href="servicio-rinomodelacion.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('toxina', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Toxina.png" alt="Antes y Después Toxina Botulínica (Botox y Baby Botox) en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 6 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Rejuvenecimiento</span>
+            <h3>Toxina Botulínica (Botox)</h3>
+            <p>Prevención y eliminación de líneas de expresión en frente, entrecejo y patas de gallo, además de aplicación terapéutica en bruxismo y sonrisa gingival.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (6 casos) →</span>
+              <a href="servicio-toxina-botulinica.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('armonizacion', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Marcaje.png" alt="Antes y Después Armonización Facial, Contorno Mandibular, Mentón y Pómulos en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 7 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Rellenos Faciales</span>
+            <h3>Armonización y Mandíbula</h3>
+            <p>Equilibrio integral de las facciones mediante marcaje mandibular, proyección de mentón, reposición de pómulos y ocultamiento de papada en mujeres y hombres.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (7 casos) →</span>
+              <a href="servicio-armonizacion-facial.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('ojeras', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/10/Beforeafter_Relleno-de-ojeras.png" alt="Antes y Después Corrección de Ojeras y Rejuvenecimiento con ADN de Salmón (PDRN) en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 6 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Contorno de Ojos y Piel</span>
+            <h3>Ojeras y ADN de Salmón</h3>
+            <p>Relleno de surco lagrimal con ácido hialurónico, enzimas Specific Periocular y bio-regeneración celular con polinucleótidos de ADN de salmón.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (6 casos) →</span>
+              <a href="servicio-pdrn-rejuvenecimiento.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('bioestimulacion', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/10/Hilos-PDO.png" alt="Antes y Después Bioestimulación de Colágeno, Hilos Tensores PDO y Aparatología (HIFU / CO2) en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 7 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Rejuvenecimiento y Aparatología</span>
+            <h3>Hilos PDO, Colágeno y HIFU</h3>
+            <p>Combate la flacidez facial y corporal estimulando colágeno propio mediante Sculptra, Hidroxiapatita, Hilos PDO, Ultraformer HIFU y Láser CO2 Fraccionado.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (7 casos) →</span>
+              <a href="servicio-aparatologia.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+        <article class="card reveal-up" style="cursor:pointer;" onclick="openAlbumModal('piel_corporal', 0)">
+          <div class="card-img" style="height:265px;">
+            <img src="https://naramedspa.com/wp-content/uploads/2025/09/Control-de-acne.png" alt="Antes y Después Control de Acné, Melasma, Várices y Remodelación Corporal (Glúteos) en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">📸 9 Fotos Reales · Clic para abrir álbum</span>
+          </div>
+          <div class="card-body">
+            <span style="font-size:0.75rem;font-weight:800;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.06em;">Piel y Corporal</span>
+            <h3>Acné, Manchas, Várices y Glúteos</h3>
+            <p>Enzimas recombinantes para acné activo, súper despigmentante de melasma, escleroterapia de várices y aumento de glúteos sin cirugía.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+              <span style="color:var(--rose-deep);font-weight:800;font-size:0.86rem;">Abrir Galería (9 casos) →</span>
+              <a href="servicio-piel-corporal.html" onclick="event.stopPropagation();" style="font-size:0.8rem;color:var(--text-muted);text-decoration:underline;">Ver servicio</a>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+
+      <div style="text-align:center;margin-top:42px;">
+        <a href="antes-y-despues.html" class="btn btn-primary">Ver Página Completa con los 55+ Casos de Antes y Después →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       SUPER-WIDGET INTERACTIVO 3: CALCULADORA DE PAQUETES, PROMOCIONES Y AHORRO VS SAN DIEGO / CIRUGÍA
+       ======================================================================= -->
+  <section class="section" id="calculadora-paquetes">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="eyebrow">✦ Cotizador Interactivo y Comparador de Valor</div>
+        <h2>Arma Tu Paquete o Elige una Promoción: Mira Cuánto Ahorras sin Cirugía</h2>
+        <p>Selecciona uno o varios procedimientos para calcular en tiempo real tu inversión estimada en Nara Med Spa (Zona Río), tu descuento por paquete combinado y tu ahorro frente a clínicas de San Diego o quirófano.</p>
+      </div>
+
+      <div class="calc-box reveal-up">
+        <!-- Paquetes Prearmados con 1 Clic -->
+        <div style="margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <span style="font-size:0.85rem;color:var(--gold-light);font-weight:700;">⚡ Paquetes Recomendados (Clic para cargar combinación):</span>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <button type="button" class="btn btn-gold" style="padding:8px 16px;font-size:0.8rem;" onclick="applyPresetPackage(['labios','rino'])">✨ Pack Perfil Perfecto (Labios + Rino)</button>
+            <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.3);padding:8px 16px;font-size:0.8rem;" onclick="applyPresetPackage(['botox','pdrn','facial'])">🌟 Pack Glow & Rejuvenecimiento</button>
+            <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.3);padding:8px 16px;font-size:0.8rem;" onclick="applyPresetPackage(['labios','rino','mandibula','botox'])">👑 Full Face Armonización 360°</button>
+            <button type="button" class="btn btn-outline" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.3);padding:8px 16px;font-size:0.8rem;" onclick="applyPresetPackage(['hifu','suero'])">💎 Lifting sin Agujas + Suero NAD+</button>
+          </div>
+        </div>
+
+        <div class="calc-grid">
+          <div>
+            <h3 style="font-size:1.55rem;margin-bottom:14px;color:#fff;">1. Haz clic en los tratamientos que te gustaría realizarte:</h3>
+            <div class="treat-toggle-list" id="calcTreatList">
+              <div class="treat-check-card selected" data-id="labios" data-name="Diseño y Aumento de Labios (AH)" data-mxn="4200" data-usd="750" data-surg="35000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">👄 Aumento de Labios (AH)</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$4,200 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">En San Diego: ~$750 USD ($14,200 MXN)</span>
+              </div>
+
+              <div class="treat-check-card selected" data-id="rino" data-name="Rinomodelación sin Cirugía" data-mxn="4800" data-usd="950" data-surg="75000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">👃 Rinomodelación sin Cirugía</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$4,800 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">Rinoplastia quirúrgica: +$75,000 MXN</span>
+              </div>
+
+              <div class="treat-check-card" data-id="botox" data-name="Toxina Botulínica (Botox 3 Zonas)" data-mxn="3800" data-usd="650" data-surg="45000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">✨ Toxina Botulínica (3 Zonas)</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$3,800 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">En San Diego: ~$650 USD ($12,300 MXN)</span>
+              </div>
+
+              <div class="treat-check-card" data-id="mandibula" data-name="Contorno Mandibular / Mentón" data-mxn="4600" data-usd="850" data-surg="65000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">💎 Marcaje Mandibular / Mentón</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$4,600 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">Implante quirúrgico: +$65,000 MXN</span>
+              </div>
+
+              <div class="treat-check-card" data-id="pdrn" data-name="ADN de Salmón (PDRN) / Ojeras" data-mxn="3500" data-usd="600" data-surg="40000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">🧬 ADN de Salmón (PDRN) / Ojeras</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$3,500 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">Blefaroplastia quirúrgica: +$40,000 MXN</span>
+              </div>
+
+              <div class="treat-check-card" data-id="hifu" data-name="Ultraformer HIFU / Láser CO2" data-mxn="5500" data-usd="1200" data-surg="95000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">⚡ Ultraformer HIFU / Láser CO2</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$5,500 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">Lifting quirúrgico: +$95,000 MXN</span>
+              </div>
+
+              <div class="treat-check-card" data-id="suero" data-name="Sueroterapia IV (NAD+ / Glutatión)" data-mxn="2200" data-usd="380" data-surg="8000" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">💧 Sueroterapia IV (NAD+ / Detox)</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$2,200 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">En San Diego IV Lounge: ~$380 USD</span>
+              </div>
+
+              <div class="treat-check-card" data-id="facial" data-name="Limpieza Facial Profunda +Valoración" data-mxn="1200" data-usd="220" data-surg="4500" onclick="toggleCalcItem(this)">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong style="font-size:0.93rem;color:#fff;">🌸 Limpieza Facial Clínica</strong>
+                  <span style="color:var(--gold-light);font-weight:800;font-size:0.85rem;">~$1,200 MXN</span>
+                </div>
+                <span style="font-size:0.76rem;color:#bfb2b5;">Con cosmetóloga certificada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel de Resultado Financiero y Beneficio en Tiempo Real -->
+          <div class="calc-summary-panel">
+            <span style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold-light);font-weight:800;">✦ Tu Plan Personalizado en Zona Río</span>
+            <h3 class="serif" id="calcCountTitle" style="font-size:1.9rem;margin:4px 0 12px;color:#fff;">2 Tratamientos Seleccionados</h3>
+
+            <div id="calcSelectedPills" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;"></div>
+
+            <div style="background:rgba(0,0,0,0.35);border-radius:16px;padding:18px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.08);">
+              <div style="display:flex;justify-content:space-between;font-size:0.86rem;color:#c9bcc0;margin-bottom:6px;">
+                <span>Precio Regular Individual:</span>
+                <span id="calcRegularMxn" style="text-decoration:line-through;">$9,000 MXN</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.88rem;color:#6ce09b;font-weight:700;margin-bottom:10px;">
+                <span id="calcDiscountLabel">Beneficio Paquete Nara (12% OFF):</span>
+                <span id="calcDiscountMxn">-$1,080 MXN</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;border-top:1px solid rgba(255,255,255,0.12);">
+                <span style="font-weight:700;font-size:0.95rem;">Inversión Estimada Nara:</span>
+                <div style="text-align:right;">
+                  <strong id="calcFinalMxn" style="font-size:1.75rem;color:var(--gold-light);display:block;line-height:1;">$7,920 MXN</strong>
+                  <span id="calcFinalUsd" style="font-size:0.78rem;color:#cbbec0;">Aprox. ~$415 USD · Valoración incluida</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comparativa de Ahorro vs San Diego y Cirugía -->
+            <div style="background:rgba(46,158,91,0.14);border:1px solid rgba(108,224,155,0.35);border-radius:14px;padding:14px 16px;margin-bottom:18px;">
+              <div style="font-size:0.82rem;color:#d9f7e5;margin-bottom:4px;">
+                🇺🇸 <strong>En San Diego pagarías:</strong> <span id="calcSdCost">$1,700 USD (~$32,300 MXN)</span>
+              </div>
+              <div style="font-size:0.88rem;color:#6ce09b;font-weight:800;">
+                💰 Te ahorras en Nara Tijuana: <span id="calcSdSavings">$24,380 MXN (75% menos)</span>
+              </div>
+              <div style="font-size:0.77rem;color:#cbbec0;margin-top:4px;">
+                🏥 Vs. Cirugía plástica (<span id="calcSurgCost">$110,000 MXN</span>): <strong>0 días de hospitalización ni cicatrices</strong>.
+              </div>
+            </div>
+
+            <a id="calcWaBtn" href="https://api.whatsapp.com/send?phone=526632061157&text=Hola%20Nara%20Med%20Spa,%20arm%C3%A9%20mi%20paquete%20en%20la%20web%20y%20quiero%20agendar" target="_blank" rel="noopener" class="btn btn-gold" style="width:100%;padding:15px;">
+              Reservar Este Paquete por WhatsApp →
+            </a>
+            <span style="display:block;text-align:center;font-size:0.73rem;color:#9e9093;margin-top:8px;">*Precios orientativos sujetos a valoración médica personalizada en consultorio.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARQUITECTURA DE SUBPÁGINAS DE SERVICIOS -->
+  <section class="section" id="especialidades" style="background: var(--bg-blush);">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="eyebrow">✦ Arquitectura Clínica Especializada</div>
+        <h2>Explora Nuestras Áreas Médicas y Subpáginas</h2>
+        <p>Cada especialidad cuenta con su propia página dedicada con protocolos, videos clínicos, preguntas frecuentes y galería completa de casos reales.</p>
+      </div>
+
+      <div class="grid-4">
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2025/08/Resultados-labios-1.png" alt="Aumento de labios en Nara Med Spa Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina Dedicada</span>
+          </div>
+          <div class="card-body">
+            <h3>Aumento y Diseño de Labios</h3>
+            <p>Perfilado natural, hidratación profunda y técnica de Labios Rusos con ácido hialurónico. Incluye álbum con 10 casos reales.</p>
+            <a href="servicio-labios.html" class="btn btn-outline" style="width:100%;">Entrar a Página de Labios →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2025/08/Resultados-Rino.png" alt="Rinomodelación sin cirugía en Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina Dedicada</span>
+          </div>
+          <div class="card-body">
+            <h3>Rinomodelación sin Cirugía</h3>
+            <p>Perfilado nasal inmediato con ácido hialurónico sin quirófano ni incapacidad. Incluye álbum con 10 casos de antes y después.</p>
+            <a href="servicio-rinomodelacion.html" class="btn btn-outline" style="width:100%;">Entrar a Rinomodelación →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Toxina-botulinica.png" alt="Toxina Botulínica Botox en Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina + Video</span>
+          </div>
+          <div class="card-body">
+            <h3>Toxina Botulínica, Bruxismo y Sudoración</h3>
+            <p>Eliminación de arrugas, Baby Botox, alivio de bruxismo, sonrisa gingival e hiperhidrosis con video explicativo.</p>
+            <a href="servicio-toxina-botulinica.html" class="btn btn-outline" style="width:100%;">Entrar a Toxina Botulínica →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/Armonizacion2.png" alt="Armonización facial y contorno mandibular Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina Dedicada</span>
+          </div>
+          <div class="card-body">
+            <h3>Armonización, Mandíbula, Mentón y Pómulos</h3>
+            <p>Definición del perfil facial femenino y masculino mediante ácido hialurónico e hidroxiapatita de calcio.</p>
+            <a href="servicio-armonizacion-facial.html" class="btn btn-outline" style="width:100%;">Entrar a Armonización →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2025/12/REJUVENECIMIENTO-ADN-de-salmon.png" alt="ADN de salmón PDRN, ojeras e hilos PDO en Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina Dedicada</span>
+          </div>
+          <div class="card-body">
+            <h3>ADN de Salmón (PDRN), Ojeras e Hilos PDO</h3>
+            <p>Bio-regeneración con polinucleótidos de salmón, corrección de ojeras, Skinbooster, Sculptra e hilos tensores PDO.</p>
+            <a href="servicio-pdrn-rejuvenecimiento.html" class="btn btn-outline" style="width:100%;">Entrar a Bio-Regeneración →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/10/PORTADA1HIFU.png" alt="Aparatología Ultraformer HIFU, Láser CO2 y Soprano Titanium" loading="lazy" />
+            <span class="card-badge">Subpágina + Video</span>
+          </div>
+          <div class="card-body">
+            <h3>Aparatología: HIFU, Láser CO2, Zeus y Soprano</h3>
+            <p>Ultrasonido focalizado Ultraformer, Láser CO2 Fraccionado, radiofrecuencia con microagujas Zeus y depilación tridiodo.</p>
+            <a href="servicio-aparatologia.html" class="btn btn-outline" style="width:100%;">Entrar a Aparatología →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/10/RellenoGluteos2-1.png" alt="Glúteos sin cirugía, acné, melasma y control de peso en Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina + Video</span>
+          </div>
+          <div class="card-body">
+            <h3>Piel y Corporal: Acné, Manchas, Glúteos y Peso</h3>
+            <p>Relleno de glúteos (con video real), control de peso con Tirzepatida, várices, anticelulitis, acné y súper despigmentante.</p>
+            <a href="servicio-piel-corporal.html" class="btn btn-outline" style="width:100%;">Entrar a Piel y Corporal →</a>
+          </div>
+        </article>
+
+        <article class="card reveal-up">
+          <div class="card-img">
+            <img src="https://naramedspa.com/wp-content/uploads/2024/09/IMG_7870.png" alt="Cosmetología limpiezas faciales y masajes en Tijuana" loading="lazy" />
+            <span class="card-badge">Subpágina Dedicada</span>
+          </div>
+          <div class="card-body">
+            <h3>Cosmetología: Limpiezas Faciales y Masajes</h3>
+            <p>Faciales personalizados previa valoración, masajes terapéuticos/descontracturantes y moldeo corporal sin agujas.</p>
+            <a href="servicio-cosmetologia.html" class="btn btn-outline" style="width:100%;">Entrar a Cosmetología →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIO DESTACADO: SUEROTERAPIA INTRAVENOSA -->
+  <section class="section" style="background: radial-gradient(circle at top left, #2b1d21 0%, #140f11 70%); color:#fff;">
+    <div class="container" style="display:grid;grid-template-columns:0.95fr 1.05fr;gap:40px;align-items:center;">
+      <div class="reveal-up" style="border-radius:26px;overflow:hidden;border:2px solid var(--border-gold);position:relative;">
+        <img src="https://naramedspa.com/wp-content/uploads/2026/01/Sueroterapia-tijuana-Nara.jpg" alt="Sueroterapia Intravenosa en Nara Med Spa Tijuana" style="width:100%;height:480px;object-fit:cover;display:block;" loading="lazy" />
+        <div style="position:absolute;bottom:0;inset-inline:0;padding:24px;background:linear-gradient(180deg,transparent,rgba(14,10,11,0.94));">
+          <span style="color:var(--gold-light);font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">★ Servicio Estrella en Tijuana</span>
+          <h3 class="serif" style="font-size:1.9rem;">IV Drip Lounge · 7 Fórmulas Intravenosas</h3>
+        </div>
+      </div>
+      <div class="reveal-up">
+        <div class="eyebrow" style="background:rgba(201,164,106,0.16);color:var(--gold-light);border-color:rgba(201,164,106,0.4);">★ Servicio Destacado · Bienestar y Longevidad</div>
+        <h2 style="font-size:clamp(2.1rem,3.5vw,3.1rem);line-height:1.12;margin-bottom:16px;color:#fff;">Sueroterapia Intravenosa: NAD+, Glutatión y Multivitamínicos</h2>
+        <p style="color:#cfc3c5;margin-bottom:24px;">
+          Nutrición celular directa al torrente sanguíneo con absorción del 100%. Fortalece tu sistema inmunológico, desintoxica el hígado, ilumina tu piel y combate la fatiga crónica en sesiones de 45 minutos.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px;">
+          <a href="sueroterapia.html#nad" style="background:rgba(255,255,255,0.06);padding:12px 16px;border-radius:12px;color:#fff;text-decoration:none;border:1px solid rgba(201,164,106,0.3);">💧 <strong>NAD+</strong> · Energía y Longevidad</a>
+          <a href="sueroterapia.html#glutation" style="background:rgba(255,255,255,0.06);padding:12px 16px;border-radius:12px;color:#fff;text-decoration:none;border:1px solid rgba(201,164,106,0.3);">💧 <strong>Glutatión</strong> · Detox y Piel</a>
+          <a href="sueroterapia.html#biodefense" style="background:rgba(255,255,255,0.06);padding:12px 16px;border-radius:12px;color:#fff;text-decoration:none;border:1px solid rgba(201,164,106,0.3);">💧 <strong>Biodefense</strong> · Inmunidad</a>
+          <a href="sueroterapia.html#stress-relief" style="background:rgba(255,255,255,0.06);padding:12px 16px;border-radius:12px;color:#fff;text-decoration:none;border:1px solid rgba(201,164,106,0.3);">💧 <strong>Stress Relief</strong> & Power Boost</a>
+        </div>
+        <a href="sueroterapia.html" class="btn btn-gold">Entrar a la Subpágina de Sueroterapia IV →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN INTERACTIVA EN PORTADA (CON MAPA EN VIVO DE ZONA RÍO) -->
+  <section class="section" id="ubicacion-rapida">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="eyebrow">✦ Ubicación Estratégica a 8 Minutos de la Garita de San Ysidro</div>
+        <h2>Visítanos en Torre Norte · Zona Urbana Río Tijuana</h2>
+        <p>Av. Diego Rivera 2351, Consultorio 505, Zona Urbana Río, 22010 Tijuana, B.C. · Estacionamiento y seguridad en el edificio.</p>
+      </div>
+
+      <div class="reveal-up" style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:28px;background:#fff;border:1.5px solid var(--border-soft);border-radius:26px;overflow:hidden;box-shadow:var(--shadow-lux);">
+        <div style="min-height:380px;position:relative;background:#e9e4de;">
+          <iframe
+            title="Mapa Interactivo Nara Med Spa en Torre Norte Zona Río Tijuana"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-117.0265%2C32.5220%2C-117.0115%2C32.5320&amp;layer=mapnik&amp;marker=32.5270%2C-117.0190"
+            style="width:100%;height:100%;min-height:380px;border:0;display:block;"
+            loading="lazy">
+          </iframe>
+        </div>
+        <div style="padding:32px;display:flex;flex-direction:column;justify-content:center;">
+          <span class="eyebrow" style="width:fit-content;">📍 Zona Río Tijuana</span>
+          <h3 style="font-size:2rem;margin-bottom:10px;">Torre Norte · Consultorio 505</h3>
+          <p style="font-size:0.93rem;color:var(--text-muted);margin-bottom:16px;">
+            <strong>Dirección exacta:</strong> Av. Diego Rivera 2351, Piso 5, Consultorio 505, Zona Urbana Río, C.P. 22010, Tijuana, B.C.
+          </p>
+          <div style="background:var(--bg-blush);padding:14px 16px;border-radius:14px;margin-bottom:20px;font-size:0.86rem;">
+            <div>🚗 <strong>Desde Garita San Ysidro:</strong> 8 minutos por Paseo de los Héroes.</div>
+            <div style="margin-top:4px;">🕘 <strong>Horario:</strong> Lunes a Sábado de 9:00 A.M. a 5:00 P.M.</div>
+            <div style="margin-top:4px;">📞 <strong>Recepción:</strong> +52 663 206 1157</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Torre+Norte+Av+Diego+Rivera+2351+Zona+Urbana+Rio+Tijuana" target="_blank" rel="noopener" class="btn btn-gold">Abrir Ruta en Google Maps →</a>
+            <a href="contacto.html" class="btn btn-primary">Ir a Página de Contacto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // -----------------------------------------------------------------------
+    // LÓGICA DEL SIMULADOR FACIAL INTERACTIVO (7 ZONAS ANATÓMICAS)
+    // -----------------------------------------------------------------------
+    const FACE_ZONES = {
+      frente: {
+        badge: "Zona 1 · Tercio Superior Facial",
+        title: "Toxina Botulínica (Botox y Baby Botox)",
+        desc: "Relaja selectivamente los músculos de la frente, entrecejo y patas de gallo para eliminar arrugas dinámicas conservando tu expresión natural.",
+        doIt: "Piel lisa y descansada en 4 a 7 días; previenes que la piel se quiebre y requieres menos unidades a futuro.",
+        skipIt: "Las líneas dinámicas fracturan el colágeno dérmico convirtiéndose en surcos profundos permanentes.",
+        img: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Toxina.png",
+        price: "Inversión estimada: ~$3,800 MXN (vs. $650 USD en San Diego)",
+        album: "toxina",
+        page: "servicio-toxina-botulinica.html"
+      },
+      ojeras: {
+        badge: "Zona 2 · Contorno Periocular",
+        title: "Corrección de Ojeras y ADN de Salmón (PDRN)",
+        desc: "Rellena el hundimiento del surco lagrimal con ácido hialurónico específico y regenera la piel fina del párpado con polinucleótidos de salmón o Enzimas Periocular.",
+        doIt: "Eliminas el aspecto de cansancio crónico al instante e iluminas la mirada sin pasar por blefaroplastia.",
+        skipIt: "La piel periocular pierde densidad, acentuando la sombra oscura, las bolsas y las líneas finas.",
+        img: "https://naramedspa.com/wp-content/uploads/2024/10/Beforeafter_Relleno-de-ojeras.png",
+        price: "Inversión estimada: ~$3,500 – $4,500 MXN (vs. $750 USD en San Diego)",
+        album: "ojeras",
+        page: "servicio-pdrn-rejuvenecimiento.html"
+      },
+      nariz: {
+        badge: "Zona 3 · Perfil Nasal",
+        title: "Rinomodelación sin Cirugía",
+        desc: "Rectifica el dorso nasal y eleva la punta en 30 minutos mediante micro-depósitos de ácido hialurónico estructural de alta densidad.",
+        doIt: "Perfil recto y armónico de inmediato en consultorio, sin anestesia general, sin yeso y sin incapacidad.",
+        skipIt: "Una rinoplastia quirúrgica cuesta más de $75,000 MXN y requiere semanas de inflamación y reposo.",
+        img: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Rino.png",
+        price: "Inversión estimada: ~$4,800 MXN (Ahorras +85% vs cirugía)",
+        album: "rinomodelacion",
+        page: "servicio-rinomodelacion.html"
+      },
+      pomulos: {
+        badge: "Zona 4 · Tercio Medio y Calidad de Piel",
+        title: "Relleno de Pómulos, HIFU y ADN de Salmón",
+        desc: "Reposiciona el soporte de las mejillas disminuyendo el surco nasogeniano y bioestimula el colágeno con Ultraformer HIFU, Hilos PDO o PDRN.",
+        doIt: "Efecto lifting inmediato que levanta el rostro y devuelve luminosidad tipo 'glass skin'.",
+        skipIt: "La caída de los compartimentos grasos del pómulo profundiza los surcos nasogenianos y marca la flacidez.",
+        img: "https://naramedspa.com/wp-content/uploads/2025/12/REJUVENECIMIENTO-ADN-de-salmon.png",
+        price: "Inversión estimada: ~$3,500 – $5,500 MXN según protocolo",
+        album: "bioestimulacion",
+        page: "servicio-pdrn-rejuvenecimiento.html"
+      },
+      labios: {
+        badge: "Zona 5 · Armonía Labial",
+        title: "Aumento, Perfilado e Hidratación de Labios",
+        desc: "Define el arco de Cupido, corrige asimetrías e hidrata o proyecta el volumen desde un acabado sutil hasta técnica de Labios Rusos.",
+        doIt: "Labios jugosos, simétricos y definidos al instante con ácido hialurónico biocompatible.",
+        skipIt: "Con los años el labio pierde ácido hialurónico natural, adelgazándose y formando líneas verticales ('código de barras').",
+        img: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios.png",
+        price: "Inversión estimada: ~$4,200 MXN (vs. $750 USD en San Diego)",
+        album: "labios",
+        page: "servicio-labios.html"
+      },
+      mandibula: {
+        badge: "Zona 6 · Tercio Inferior y Masetero",
+        title: "Contorno Mandibular, Mentón y Alivio de Bruxismo",
+        desc: "Define el ángulo mandibular y proyecta el mentón con ácido hialurónico o afina el rostro cuadrado relajando el músculo masetero con toxina botulínica.",
+        doIt: "Rostro estilizado, perfil equilibrado, ocultamiento visual de papada y alivio del dolor por apretar los dientes.",
+        skipIt: "El bruxismo desgasta las piezas dentales e hipertrofia el músculo ensanchando la parte baja del rostro.",
+        img: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Marcaje.png",
+        price: "Inversión estimada: ~$4,200 – $4,800 MXN",
+        album: "armonizacion",
+        page: "servicio-armonizacion-facial.html"
+      },
+      cuello: {
+        badge: "Zona 7 · Cuello, Papada y Remodelación Corporal",
+        title: "Ultraformer HIFU, Enzimas Lipo-reductoras y Corporal",
+        desc: "Elimina grasa localizada en papada y cuerpo con enzimas recombinantes, tensa la piel del cuello y remodela glúteos sin cirugía.",
+        doIt: "Reducción progresiva de grasa localizada y tensado dérmico sin liposucción ni tiempos de reposo.",
+        skipIt: "La flacidez submentoniana y del cuello suele delatar la edad incluso cuando el rostro luce joven.",
+        img: "https://naramedspa.com/wp-content/uploads/2024/10/HIFU2.png",
+        price: "Inversión estimada: ~$2,800 – $5,500 MXN",
+        album: "piel_corporal",
+        page: "servicio-piel-corporal.html"
+      }
+    };
+
+    function selectFaceZone(zoneKey, pinEl) {
+      const z = FACE_ZONES[zoneKey];
+      if (!z) return;
+      document.getElementById('fzBadge').textContent = z.badge;
+      document.getElementById('fzTitle').textContent = z.title;
+      document.getElementById('fzDesc').textContent = z.desc;
+      document.getElementById('fzDoIt').textContent = z.doIt;
+      document.getElementById('fzSkipIt').textContent = z.skipIt;
+      document.getElementById('fzImg').src = z.img;
+      document.getElementById('fzPriceHint').textContent = z.price;
+      document.getElementById('fzAlbumBtn').setAttribute('onclick', `openAlbumModal('${z.album}', 0)`);
+      document.getElementById('fzPageLink').href = z.page;
+      document.getElementById('fzWaLink').href = `https://api.whatsapp.com/send?phone=526632061157&text=${encodeURIComponent('Hola Nara Med Spa, usé el Simulador Facial en su web y quiero cotizar: ' + z.title)}`;
+
+      const keys = Object.keys(FACE_ZONES);
+      const idx = keys.indexOf(zoneKey);
+      document.querySelectorAll('.hotspot-pin').forEach((p, i) => {
+        p.classList.toggle('active', i === idx);
+      });
+      const btns = document.getElementById('faceZoneButtons').children;
+      Array.from(btns).forEach((b, i) => {
+        b.className = (i === idx) ? 'btn btn-gold' : 'btn btn-outline';
+      });
+    }
+
+    // -----------------------------------------------------------------------
+    // LÓGICA DE LA CALCULADORA DE PAQUETES Y AHORRO VS SAN DIEGO / CIRUGÍA
+    // -----------------------------------------------------------------------
+    function toggleCalcItem(cardEl) {
+      cardEl.classList.toggle('selected');
+      recalcPackage();
+    }
+
+    function applyPresetPackage(ids) {
+      document.querySelectorAll('#calcTreatList .treat-check-card').forEach(card => {
+        card.classList.toggle('selected', ids.includes(card.dataset.id));
+      });
+      recalcPackage();
+    }
+
+    function recalcPackage() {
+      const selected = Array.from(document.querySelectorAll('#calcTreatList .treat-check-card.selected'));
+      let sumMxn = 0;
+      let sumUsdSd = 0;
+      let sumSurg = 0;
+      const names = [];
+
+      selected.forEach(c => {
+        sumMxn += Number(c.dataset.mxn || 0);
+        sumUsdSd += Number(c.dataset.usd || 0);
+        sumSurg += Number(c.dataset.surg || 0);
+        names.push(c.dataset.name);
+      });
+
+      const count = selected.length;
+      const discRate = count >= 3 ? 0.15 : (count === 2 ? 0.12 : 0.05);
+      const discMxn = Math.round(sumMxn * discRate);
+      const finalMxn = sumMxn - discMxn;
+      const finalUsd = Math.round(finalMxn / 19);
+      const sdMxn = sumUsdSd * 19;
+      const savedVsSd = Math.max(0, sdMxn - finalMxn);
+      const savedPct = sdMxn > 0 ? Math.round((savedVsSd / sdMxn) * 100) : 0;
+
+      document.getElementById('calcCountTitle').textContent = count === 0
+        ? "Selecciona al menos 1 tratamiento"
+        : `${count} ${count === 1 ? 'Tratamiento Seleccionado' : 'Tratamientos en Tu Paquete'}`;
+
+      document.getElementById('calcSelectedPills').innerHTML = names.map(n =>
+        `<span style="background:rgba(201,164,106,0.2);color:#E6C994;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:99px;border:1px solid rgba(201,164,106,0.4);">✓ ${n}</span>`
+      ).join('');
+
+      document.getElementById('calcRegularMxn').textContent = `$${sumMxn.toLocaleString('es-MX')} MXN`;
+      document.getElementById('calcDiscountLabel').textContent = `Beneficio Paquete Nara (${Math.round(discRate*100)}% OFF):`;
+      document.getElementById('calcDiscountMxn').textContent = `-$${discMxn.toLocaleString('es-MX')} MXN`;
+      document.getElementById('calcFinalMxn').textContent = `$${finalMxn.toLocaleString('es-MX')} MXN`;
+      document.getElementById('calcFinalUsd').textContent = `Aprox. ~$${finalUsd.toLocaleString('es-MX')} USD · Valoración médica incluida`;
+      document.getElementById('calcSdCost').textContent = `$${sumUsdSd.toLocaleString('es-MX')} USD (~$${sdMxn.toLocaleString('es-MX')} MXN)`;
+      document.getElementById('calcSdSavings').textContent = `$${savedVsSd.toLocaleString('es-MX')} MXN (${savedPct}% menos)`;
+      document.getElementById('calcSurgCost').textContent = `$${sumSurg.toLocaleString('es-MX')} MXN`;
+
+      const msg = `Hola Nara Med Spa ✨, armé mi paquete en la calculadora web (${names.join(' + ')}) con inversión estimada de $${finalMxn.toLocaleString('es-MX')} MXN y quiero agendar mi valoración.`;
+      document.getElementById('calcWaBtn').href = `https://api.whatsapp.com/send?phone=526632061157&text=${encodeURIComponent(msg)}`;
+    }
+
+    window.addEventListener('DOMContentLoaded', recalcPackage);
+  </script>
+
+  <!-- FOOTER MULTI-PÁGINA CON ENLACES INTERNOS SEO -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="https://naramedspa.com/wp-content/uploads/2024/10/Diseno_sin_titulo__17_-removebg-preview.png" alt="Nara Med Spa Logotipo Blanco" style="height: 54px; margin-bottom: 16px;" />
+        <p style="font-size: 0.88rem; margin-bottom: 14px;">
+          Clínica de Medicina Estética, Aparatología Avanzada, Sueroterapia Intravenosa y Cosmetología en Zona Río, Tijuana. Insumos avalados por COFEPRIS.
+        </p>
+        <p style="font-size: 0.82rem; color: var(--gold-light);">Dra. Stephanie Flores · Céd. Prof. 11777648</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Páginas de Tratamientos</h4>
+        <ul>
+          <li><a href="servicio-labios.html">Aumento y Diseño de Labios</a></li>
+          <li><a href="servicio-rinomodelacion.html">Rinomodelación sin Cirugía</a></li>
+          <li><a href="servicio-toxina-botulinica.html">Toxina Botulínica, Bruxismo y Sudoración</a></li>
+          <li><a href="servicio-armonizacion-facial.html">Armonización, Mandíbula y Mentón</a></li>
+          <li><a href="servicio-pdrn-rejuvenecimiento.html">ADN de Salmón (PDRN), Ojeras e Hilos PDO</a></li>
+          <li><a href="servicio-aparatologia.html">Ultraformer HIFU, Láser CO2 y Soprano</a></li>
+          <li><a href="servicio-piel-corporal.html">Acné, Melasma, Glúteos y Control de Peso</a></li>
+          <li><a href="servicio-cosmetologia.html">Cosmetología, Faciales y Masajes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Herramientas Interactivas</h4>
+        <ul>
+          <li><a href="index.html#simulador-facial">✦ Mapa Facial Interactivo</a></li>
+          <li><a href="index.html#calculadora-paquetes">✦ Calculadora de Paquetes y Ahorro</a></li>
+          <li><a href="sueroterapia.html">★ Sueroterapia IV en Tijuana</a></li>
+          <li><a href="antes-y-despues.html">Galerías de Antes y Después (55+ Casos)</a></li>
+          <li><a href="conocenos.html">Quiénes Somos y Equipo Médico</a></li>
+          <li><a href="blog.html">Blog de Medicina Estética</a></li>
+          <li><a href="contacto.html">Mapa Zona Río y Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ubicación y Contacto</h4>
+        <ul>
+          <li>📍 Torre Norte, Av. Diego Rivera 2351, Consultorio 505, Zona Urbana Río, 22010 Tijuana, B.C.</li>
+          <li>📞 <a href="tel:+526632061157">+52 663 206 1157</a></li>
+          <li>🕘 Lunes a Sábado: 9:00 A.M. – 5:00 P.M.</li>
+          <li style="margin-top: 10px;">
+            <a href="https://www.instagram.com/naramedspa/" target="_blank" rel="noopener">Instagram @naramedspa</a> ·
+            <a href="https://www.facebook.com/Naramedspa" target="_blank" rel="noopener">Facebook</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="max-width: 1320px; margin: 0 auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: #8c7f82;">
+      <span>© 2026 Nara Med Spa Tijuana. Todos los derechos reservados.</span>
+      <a href="auditoria.html" style="color: var(--gold-light); text-decoration: none;">Ver Reporte de Diagnóstico Técnico y SEO →</a>
+    </div>
+  </footer>
+
+  <a href="https://api.whatsapp.com/send?phone=526632061157&text=Hola%20Nara%20Med%20Spa,%20quiero%20agendar%20una%20cita" target="_blank" rel="noopener" class="wa-float">
+    <span>💬 WhatsApp Directo</span>
+  </a>
+
+  <!-- MODAL GLOBAL PARA ÁLBUMES Y VIDEOS -->
+  <div class="modal-backdrop" id="globalModal" onclick="closeGlobalModal(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeGlobalModal(event, true)" aria-label="Cerrar">✕</button>
+      <div id="globalModalBody"></div>
+    </div>
+  </div>
+
+  <script>
+const NARA_ALBUMS = {
+  "labios": {
+    title: "Aumento y Diseño de Labios con Ácido Hialurónico",
+    desc: "Perfilado natural, hidratación profunda, corrección de asimetrías y técnica de Labios Rusos con ácido hialurónico certificado por COFEPRIS.",
+    link: "servicio-labios.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios.png", caption: "Aumento y Perfilado Labial · Caso Clínico 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Labios2.png", caption: "Volumen e Hidratación con Ácido Hialurónico · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Rellenolabios.png", caption: "Diseño y Proyección de Arco de Cupido · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Relleno-de-labios-sutil.png", caption: "Relleno de Labios Sutil y Natural · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/08/Resultados-labios-1.png", caption: "Aumento de Volumen Labial · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Resultado-labios.png", caption: "Hidratación y Definición de Contorno · Caso 6" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/resultado-horizontal.png", caption: "Comparativa Horizontal Antes y Después · Caso 7" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Labios.png", caption: "Armonía y Estructura Labial · Caso 8" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Labios2.png", caption: "Volumen Equilibrado sin Cirugía · Caso 9" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Labios3.png", caption: "Perfilado Ruso con Ácido Hialurónico · Caso 10" }
+    ]
+  },
+  "rinomodelacion": {
+    title: "Rinomodelación sin Cirugía",
+    desc: "Corrección de giba dorsal, elevación de punta nasal y rectificación del perfil en 30 minutos mediante ácido hialurónico de alta densidad, sin quirófano.",
+    link: "servicio-rinomodelacion.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Rino.png", caption: "Rinomodelación Perfil Completo · Caso Clínico 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/08/Resultados-Rino.png", caption: "Elevación de Punta y Rectificación de Dorso · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rinomodelacion.png", caption: "Armonización de Perfil Nasal · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rinomodelacion2.png", caption: "Corrección de Curvatura Nasal · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino-mujer.png", caption: "Perfilado Nasal Femenino · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino.png", caption: "Rinomodelación con Ácido Hialurónico · Caso 6" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino2.png", caption: "Proyección de Punta Nasal · Caso 7" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino4.png", caption: "Rectificación de Dorso sin Cirugía · Caso 8" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino5.png", caption: "Resultado Inmediato en Consultorio · Caso 9" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Rino6.png", caption: "Perfil Armónico Antes y Después · Caso 10" }
+    ]
+  },
+  "toxina": {
+    title: "Toxina Botulínica (Botox y Baby Botox)",
+    desc: "Prevención y eliminación de líneas de expresión en frente, entrecejo y patas de gallo, además de aplicación terapéutica en bruxismo y sonrisa gingival.",
+    link: "servicio-toxina-botulinica.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Toxina.png", caption: "Suavizado de Líneas de Frente y Entrecejo · Caso 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Toxina-botulinica-resultado.png", caption: "Rejuvenecimiento de Tercio Superior · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Toxina-botulinica.png", caption: "Eliminación de Arrugas Dinámicas · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Toxina-botulinica-1.png", caption: "Aplicación Precisa de Toxina Botulínica · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Toxina2.png", caption: "Control de Líneas Periocular y Frente · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Toxina23.png", caption: "Resultado Natural sin Expresión Congelada · Caso 6" }
+    ]
+  },
+  "armonizacion": {
+    title: "Armonización Facial, Contorno Mandibular, Mentón y Pómulos",
+    desc: "Equilibrio integral de las facciones mediante marcaje mandibular, proyección de mentón, reposición de pómulos y ocultamiento de papada en mujeres y hombres.",
+    link: "servicio-armonizacion-facial.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Beforeafter_Marcaje.png", caption: "Marcaje Mandibular y Definición de Ángulo · Caso 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Armonizacionfacial2.png", caption: "Armonización Facial Integral (Nariz, Labios y Mentón) · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Armonizacion2.png", caption: "Proyección de Mentón y Perfil Facial · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Marcaje-mujer.png", caption: "Definición Mandibular Femenina · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Marcaje-hombre-1.png", caption: "Marcaje Mandibular Masculino · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Lifting-hombre.png", caption: "Relleno de Pómulos y Lifting Masculino · Caso 6" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Armonizacion-facial2.png", caption: "Balance de Tercios Faciales · Caso 7" }
+    ]
+  },
+  "ojeras": {
+    title: "Corrección de Ojeras y Rejuvenecimiento con ADN de Salmón (PDRN)",
+    desc: "Relleno de surco lagrimal con ácido hialurónico, enzimas Specific Periocular y bio-regeneración celular con polinucleótidos de ADN de salmón.",
+    link: "servicio-pdrn-rejuvenecimiento.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Beforeafter_Relleno-de-ojeras.png", caption: "Corrección de Hundimiento en Ojeras · Caso 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Relleno-de-ojeras2.png", caption: "Iluminación y Relleno de Surco Lagrimal · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Ojeras.png", caption: "Hidratación y Despigmentación Periocular · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/12/REJUVENECIMIENTO-ADN-de-salmon.png", caption: "Bio-regeneración Facial con ADN de Salmón (PDRN) · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/12/REJUVENECIMIENTO-ADN-de-salmon-1.png", caption: "Luminosidad y Textura con PDRN · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/12/pure-eyes.png", caption: "ADN de Salmón en Contorno de Ojos · Caso 6" }
+    ]
+  },
+  "bioestimulacion": {
+    title: "Bioestimulación de Colágeno, Hilos Tensores PDO y Aparatología (HIFU / CO2)",
+    desc: "Combate la flacidez facial y corporal estimulando colágeno propio mediante Sculptra, Hidroxiapatita, Hilos PDO, Ultraformer HIFU y Láser CO2 Fraccionado.",
+    link: "servicio-aparatologia.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Hilos-PDO.png", caption: "Lifting sin Cirugía con Hilos Tensores PDO · Caso 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Hilos-PDO2.png", caption: "Reposicionamiento Facial con Hilos Espiculados · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Beforeafter_Sculptra.png", caption: "Bioestimulación con Sculptra / Colágeno · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/HIFU1.png", caption: "Tensado Facial con Ultraformer HIFU · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/HIFU2.png", caption: "Reducción de Papada y Flacidez con HIFU · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/09/Bioestimulacion-manos.png", caption: "Rejuvenecimiento de Manos con Bioestimulación · Caso 6" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/09/Captura-de-pantalla-2025-09-17-114025.png", caption: "Rejuvenecimiento de Cuello sin Cirugía · Caso 7" }
+    ]
+  },
+  "piel_corporal": {
+    title: "Control de Acné, Melasma, Várices y Remodelación Corporal (Glúteos)",
+    desc: "Enzimas recombinantes para acné activo, súper despigmentante de melasma, escleroterapia de várices y aumento de glúteos sin cirugía.",
+    link: "servicio-piel-corporal.html",
+    photos: [
+      { url: "https://naramedspa.com/wp-content/uploads/2025/09/Control-de-acne.png", caption: "Control Clínico de Acné con Enzimas Equilibrium · Caso 1" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/09/Acne-2.png", caption: "Recuperación de Textura y Brotes de Acné · Caso 2" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/08/Resultados2.png", caption: "Súper Despigmentante de Melasma y Manchas · Caso 3" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/08/Resultados3.png", caption: "Unificación de Tono Facial · Caso 4" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/08/Resultados4.png", caption: "Eliminación de Hiperpigmentación · Caso 5" },
+      { url: "https://naramedspa.com/wp-content/uploads/2025/09/varices.png", caption: "Eliminación de Várices y Arañitas Vasculares · Caso 6" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/RellenoGluteos2-1.png", caption: "Aumento y Proyección de Glúteos con Ácido Hialurónico · Caso 7" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/RellenoGluteosss.png", caption: "Remodelación de Glúteos sin Cirugía · Caso 8" },
+      { url: "https://naramedspa.com/wp-content/uploads/2024/10/Celulitis.png", caption: "Tratamiento Corporal Anti-Celulitis · Caso 9" }
+    ]
+  },
+};
+
+    // -----------------------------------------------------------------------
+    // 1. MEGA-MENÚ CON RETARDO DE CIERRE (350ms) PARA QUE NUNCA SE QUITE AL MOVER EL MOUSE
+    // -----------------------------------------------------------------------
+    (function initStableMenus() {
+      const megaTrigger = document.getElementById('megaTrigger');
+      const megaBtn = document.getElementById('megaBtn');
+      let megaCloseTimer = null;
+
+      if (megaTrigger && megaBtn) {
+        const openMega = () => {
+          clearTimeout(megaCloseTimer);
+          megaTrigger.classList.add('open');
+          megaBtn.setAttribute('aria-expanded', 'true');
+        };
+        const scheduleCloseMega = () => {
+          clearTimeout(megaCloseTimer);
+          megaCloseTimer = setTimeout(() => {
+            megaTrigger.classList.remove('open');
+            megaBtn.setAttribute('aria-expanded', 'false');
+          }, 360);
+        };
+
+        megaTrigger.addEventListener('mouseenter', openMega);
+        megaTrigger.addEventListener('mouseleave', scheduleCloseMega);
+        megaBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (megaTrigger.classList.contains('open')) {
+            megaTrigger.classList.remove('open');
+          } else {
+            openMega();
+          }
+        });
+      }
+
+      // Dropdown de Antes y Después con el mismo retardo suave
+      const baTrigger = document.getElementById('baDropdownTrigger');
+      let baTimer = null;
+      if (baTrigger) {
+        baTrigger.addEventListener('mouseenter', () => {
+          clearTimeout(baTimer);
+          baTrigger.classList.add('dropdown-open');
+        });
+        baTrigger.addEventListener('mouseleave', () => {
+          clearTimeout(baTimer);
+          baTimer = setTimeout(() => baTrigger.classList.remove('dropdown-open'), 320);
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        if (megaTrigger && !megaTrigger.contains(e.target)) {
+          megaTrigger.classList.remove('open');
+        }
+      });
+    })();
+
+    // -----------------------------------------------------------------------
+    // 2. BARRA DE PROGRESO DE SCROLL Y ANIMACIONES REVEAL
+    // -----------------------------------------------------------------------
+    window.addEventListener('scroll', () => {
+      const prog = document.getElementById('scrollProgress');
+      if (prog) {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+
+    // -----------------------------------------------------------------------
+    // 3. CONTROLADOR DEL DESLIZADOR INTERACTIVO ANTES / DESPUÉS
+    // -----------------------------------------------------------------------
+    const SLIDER_META = {
+      labios: { time: "30 – 40 min", rec: "Inmediata", dur: "8 a 12 Meses" },
+      rinomodelacion: { time: "25 – 35 min", rec: "Sin incapacidad", dur: "12 a 18 Meses" },
+      toxina: { time: "20 min", rec: "Inmediata", dur: "4 a 6 Meses" },
+      armonizacion: { time: "45 – 60 min", rec: "Inmediata", dur: "12 a 18 Meses" },
+      ojeras: { time: "30 min", rec: "Sin reposo", dur: "10 a 12 Meses" },
+      bioestimulacion: { time: "45 – 60 min", rec: "Inmediata", dur: "12 a 24 Meses" },
+      piel_corporal: { time: "45 – 60 min", rec: "Ambulatoria", dur: "12 a 18 Meses" }
+    };
+
+    function updateBaSlider(val) {
+      const beforeLayer = document.getElementById('baLayerBefore');
+      const divider = document.getElementById('baDividerLine');
+      const handle = document.getElementById('baHandleCircle');
+      if (!beforeLayer) return;
+      const rightClip = 100 - Number(val);
+      beforeLayer.style.clipPath = `inset(0 ${rightClip}% 0 0)`;
+      divider.style.left = val + '%';
+      handle.style.left = val + '%';
+    }
+
+    function loadSliderCase(albumKey, photoIdx, btnEl) {
+      const album = NARA_ALBUMS[albumKey];
+      if (!album) return;
+      const photo = album.photos[photoIdx] || album.photos[0];
+      const imgAfter = document.getElementById('baSliderImgAfter');
+      const imgBefore = document.getElementById('baSliderImgBefore');
+      if (imgAfter && imgBefore) {
+        imgAfter.src = photo.url;
+        imgBefore.src = photo.url;
+      }
+      const titleEl = document.getElementById('baSliderTitle');
+      if (titleEl) titleEl.textContent = album.title;
+      const meta = SLIDER_META[albumKey] || SLIDER_META.labios;
+      if (document.getElementById('baMetaTime')) document.getElementById('baMetaTime').textContent = meta.time;
+      if (document.getElementById('baMetaRecovery')) document.getElementById('baMetaRecovery').textContent = meta.rec;
+      if (document.getElementById('baMetaDuration')) document.getElementById('baMetaDuration').textContent = meta.dur;
+      const fullBtn = document.getElementById('baOpenFullAlbumBtn');
+      if (fullBtn) {
+        fullBtn.textContent = `Abrir las ${album.photos.length} Fotos de Este Álbum →`;
+        fullBtn.setAttribute('onclick', `openAlbumModal('${albumKey}', ${photoIdx})`);
+      }
+      if (btnEl && btnEl.parentElement) {
+        Array.from(btnEl.parentElement.children).forEach(b => {
+          b.className = 'btn btn-outline';
+          b.style.background = 'rgba(255,255,255,0.08)';
+          b.style.color = '#fff';
+        });
+        btnEl.className = 'btn btn-gold';
+        btnEl.style.background = '';
+        btnEl.style.color = '#140f11';
+      }
+      const range = document.getElementById('baRangeInput');
+      if (range) { range.value = 50; updateBaSlider(50); }
+    }
+
+    // -----------------------------------------------------------------------
+    // 4. MODAL DE ÁLBUMES COMPLETOS DE ANTES Y DESPUÉS
+    // -----------------------------------------------------------------------
+    function openAlbumModal(albumKey, startIndex = 0) {
+      const album = NARA_ALBUMS[albumKey];
+      if (!album) return;
+      const modal = document.getElementById('globalModal');
+      const body = document.getElementById('globalModalBody');
+      const featured = album.photos[startIndex] || album.photos[0];
+
+      let thumbsHtml = album.photos.map((p, idx) => `
+        <div onclick="switchAlbumPhoto('${albumKey}', ${idx})" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid ${idx===startIndex ? '#C9A46A' : 'rgba(255,255,255,0.12)'};aspect-ratio:1/1;background:#0e0a0b;">
+          <img src="${p.url}" alt="${p.caption}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+        </div>
+      `).join('');
+
+      body.innerHTML = `
+        <div style="padding: 6px 8px;">
+          <span style="color:#E6C994;font-size:0.76rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">✦ Galería Clínica Completa (${album.photos.length} Casos Reales)</span>
+          <h2 class="serif" style="font-size:2rem;margin:4px 0 8px;color:#fff;">${album.title}</h2>
+          <p style="color:#cbbec0;font-size:0.9rem;margin-bottom:20px;">${album.desc}</p>
+
+          <div style="background:#0f0b0c;border:1px solid rgba(201,164,106,0.35);border-radius:18px;padding:16px;text-align:center;margin-bottom:20px;">
+            <img id="albumMainImg" src="${featured.url}" alt="${featured.caption}" style="max-height:54vh;max-width:100%;border-radius:12px;object-fit:contain;" />
+            <p id="albumMainCaption" style="margin-top:10px;color:#E6C994;font-weight:700;font-size:0.92rem;">${featured.caption} (Caso ${startIndex + 1} de ${album.photos.length})</p>
+          </div>
+
+          <h4 style="font-size:1.1rem;margin-bottom:10px;color:#fff;">Selecciona otro caso real de este procedimiento:</h4>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(96px, 1fr));gap:10px;margin-bottom:22px;">
+            ${thumbsHtml}
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1);">
+            <a href="${album.link}" class="btn btn-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.35);">Ver Página Completa del Tratamiento →</a>
+            <a href="https://api.whatsapp.com/send?phone=526632061157&text=${encodeURIComponent('Hola Nara Med Spa, vi la galería de Antes y Después de ' + album.title + ' y quiero agendar una valoración')}" target="_blank" rel="noopener" class="btn btn-gold">Quiero Este Resultado · Agendar por WhatsApp →</a>
+          </div>
+        </div>
+      `;
+      modal.classList.add('open');
+    }
+
+    function switchAlbumPhoto(albumKey, idx) {
+      openAlbumModal(albumKey, idx);
+    }
+
+    function closeGlobalModal(e, force = false) {
+      const modal = document.getElementById('globalModal');
+      if (force || (e && e.target === modal)) {
+        document.getElementById('globalModalBody').innerHTML = '';
+        modal.classList.remove('open');
+      }
+    }
+  </script>
+
+</body>
+</html>
