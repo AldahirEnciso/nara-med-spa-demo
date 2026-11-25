@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual de Identidad de Marca, Paleta, Voz y Tono — Nara Med Spa (Sitio Original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Moon+Dance&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nara-malva: #BF8A8E;
+      --nara-terracota: #BC5D54;
+      --nara-malva-dark: #9C6868;
+      --nara-arena: #E4E3D3;
+      --nara-blush: #FFE5E5;
+      --nara-coral: #DA8181;
+      --nara-magenta: #CC6991;
+      --nara-gold: #C9A46A;
+      --nara-taupe: #847C74;
+      --nara-gray: #707070;
+      --nara-dark: #101010;
+      --bg-page: #FAF8F6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--nara-dark);
+      line-height: 1.6;
+      padding: 36px 20px 70px;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Botón flotante para imprimir/descargar PDF */
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .btn-print {
+      background: linear-gradient(135deg, #BF8A8E, #9C6868);
+      color: #fff;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(156, 104, 104, 0.3);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-print:hover { opacity: 0.92; }
+
+    /* Portada del Brandbook */
+    .hero-brand {
+      background: linear-gradient(135deg, #BF8A8E 0%, #9C6868 100%);
+      color: #fff;
+      border-radius: 26px;
+      padding: 46px 44px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(156, 104, 104, 0.25);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 30px;
+      align-items: center;
+    }
+    .tag-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-brand h1 {
+      font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero-brand p {
+      font-size: 0.96rem;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .hero-logo-box {
+      background: rgba(16, 16, 16, 0.85);
+      border: 2px solid var(--nara-gold);
+      border-radius: 20px;
+      padding: 26px;
+      text-align: center;
+    }
+    .hero-logo-box img {
+      max-width: 240px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    /* Bloques de Sección */
+    .card-section {
+      background: #fff;
+      border: 1px solid rgba(191, 138, 142, 0.28);
+      border-radius: 22px;
+      padding: 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+      page-break-inside: avoid;
+    }
+    .sec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--nara-arena);
+    }
+    .sec-num {
+      background: var(--nara-malva);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 5px 13px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .sec-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--nara-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Muestras de Color (Swatches) */
+    .sub-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--nara-malva-dark);
+      margin: 18px 0 12px;
+      display: block;
+    }
+    .swatches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+      gap: 18px;
+    }
+    .swatch-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+    .swatch-color {
+      height: 96px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+    .swatch-info {
+      padding: 14px 16px;
+    }
+    .swatch-info strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 3px;
+    }
+    .swatch-codes {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--nara-terracota);
+      background: rgba(188, 93, 84, 0.08);
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .swatch-info p {
+      font-size: 0.8rem;
+      color: var(--nara-gray);
+      line-height: 1.45;
+    }
+
+    /* Tipografías */
+    .typo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .typo-box {
+      background: var(--bg-page);
+      border: 1px solid rgba(191, 138, 142, 0.35);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .typo-sample-montserrat {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--nara-dark);
+      margin: 10px 0;
+      letter-spacing: 0.04em;
+    }
+    .typo-sample-moondance {
+      font-family: 'Moon Dance', cursive;
+      font-size: 2.5rem;
+      color: var(--nara-terracota);
+      margin: 6px 0;
+      line-height: 1.15;
+    }
+    .typo-sample-roboto {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.25rem;
+      color: var(--nara-gray);
+      margin: 10px 0;
+    }
+
+    /* Activos Visuales / Logos */
+    .logos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .logo-showcase {
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 170px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .logo-showcase img {
+      max-height: 85px;
+      max-width: 100%;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    .logo-showcase span {
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* Voz y Tono */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .voice-card {
+      background: var(--bg-page);
+      border-left: 4px solid var(--nara-malva);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .voice-card h3 {
+      font-size: 0.98rem;
+      color: var(--nara-terracota);
+      margin-bottom: 6px;
+    }
+    .voice-card p {
+      font-size: 0.85rem;
+      color: var(--nara-gray);
+    }
+
+    /* Copy Bank */
+    .quotes-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 14px;
+    }
+    .quote-item {
+      background: linear-gradient(135deg, rgba(191,138,142,0.12), rgba(228,227,211,0.35));
+      border: 1px solid rgba(191,138,142,0.35);
+      border-radius: 14px;
+      padding: 16px 20px;
+    }
+    .quote-item span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--nara-terracota);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .quote-item blockquote {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--nara-dark);
+      font-style: italic;
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .top-actions { display: none !important; }
+      .card-section { box-shadow: none; margin-bottom: 18px; padding: 24px; }
+      .hero-brand { box-shadow: none; margin-bottom: 20px; padding: 30px; }
+    }
+    @media (max-width: 780px) {
+      .hero-brand { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+    </div>
+
+    <!-- ENCABEZADO DEL BRANDBOOK -->
+    <header class="hero-brand">
+      <div>
+        <span class="tag-pill">Radiografía de Identidad Actual · naramedspa.com</span>
+        <h1>Manual de Paleta de Color, Diseño de Marca, Voz y Tono</h1>
+        <p>
+          Extracción técnica y verbal tomada directamente del sitio web público original de <strong>Nara Med Spa (Nara Medical Spa)</strong> en Zona Río, Tijuana: hojas de estilo CSS (<code>post-8.css</code> y <code>post-7.css</code>), biblioteca de medios de WordPress y textos reales publicados.
+        </p>
+      </div>
+      <div class="hero-logo-box">
+        <img src="https://naramedspa.com/wp-content/uploads/2024/09/Nara_logo_horizontal_gold.png" alt="Logo Horizontal Dorado Nara Med Spa" />
+        <span style="font-size: 0.76rem; color: #E4E3D3; letter-spacing: 0.06em; text-transform: uppercase;">Logotipo Oficial en Sitio Público</span>
+      </div>
+    </header>
+
+    <!-- 1. PALETA DE COLORES -->
+    <section class="card-section">
+      <div class="sec-header">
+        <h2 class="sec-title">1. Paleta de Colores Oficial (Extraída del CSS)</h2>
+        <span class="sec-num">Sección 01 · Colorimetría</span>
+      </div>
+
+      <span class="sub-label">Colores Primarios y Protagonistas</span>
+      <div class="swatches-grid">
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #BF8A8E; color: #fff;">
+            <span>Primario</span><span>#BF8A8E</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Rosa Viejo / Malva Empolvado</strong>
+            <span class="swatch-codes">HEX: #BF8A8E · RGB(191, 138, 142)</span>
+            <p>Color insignia del sitio actual. Usado en fondos principales de secciones, menú desplegable lateral y bloques de bienvenida.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #BC5D54; color: #fff;">
+            <span>Acento Fuerte</span><span>#BC5D54</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Terracota / Vino Suave</strong>
+            <span class="swatch-codes">HEX: #BC5D54 · RGB(188, 93, 84)</span>
+            <p>Usado en bordes de contenedores, líneas divisorias, acentos cálidos y contraste sobre fondos claros.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #9C6868; color: #fff;">
+            <span>Secundario</span><span>#9C6868</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Malva Profundo</strong>
+            <span class="swatch-codes">HEX: #9C6868 · RGB(156, 104, 104)</span>
+            <p>Tono de soporte para secciones secundarias, sombras de tarjetas y contraste medio.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #E4E3D3; color: #101010;">
+            <span>Base Cálida</span><span>#E4E3D3</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Arena / Beige Cálido</strong>
+            <span class="swatch-codes">HEX: #E4E3D3 · RGB(228, 227, 211)</span>
+            <p>Color base de los 46 botones-imagen de tratamientos y plecas claras de transición entre secciones.</p>
+          </div>
+        </div>
+      </div>
+
+      <span class="sub-label" style="margin-top: 26px;">Colores de Apoyo, Metálico y Neutros Tipográficos</span>
+      <div class="swatches-grid">
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #D8B77B, #B58E4F); color: #101010;">
+            <span>Metálico Marca</span><span>#C9A46A</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Oro / Champagne Dorado</strong>
+            <span class="swatch-codes">HEX: #C9A46A · RGB(201, 164, 106)</span>
+            <p>Presente en el logotipo horizontal dorado, el sello circular de marca y el botón principal de <em>"Agenda tu cita"</em>.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #FFE5E5; color: #9C6868;">
+            <span>Luz / Blush</span><span>#FFE5E5</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Rosa Pastel / Blush</strong>
+            <span class="swatch-codes">HEX: #FFE5E5 · RGB(255, 229, 229)</span>
+            <p>Fondos suaves e iluminación de bloques femeninos.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: #DA8181; color: #fff;">
+            <span>Coral / Rosa</span><span>#DA8181 / #CC6991</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Coral Rosado y Magenta Suave</strong>
+            <span class="swatch-codes">HEX: #DA8181 · #CC6991</span>
+            <p>Definidos en <code>post-8.css</code> para detalles gráficos y acentos promocionales.</p>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: linear-gradient(90deg, #847C74 0%, #707070 50%, #101010 100%); color: #fff;">
+            <span>Neutros</span><span>#847C74 · #101010</span>
+          </div>
+          <div class="swatch-info">
+            <strong>Gris Topo, Gris Medio y Carbón</strong>
+            <span class="swatch-codes">#847C74 · #707070 · #101010</span>
+            <p>Escala de neutros usada para textos descriptivos, subtítulos y encabezados oscuros.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TIPOGRAFÍAS -->
+    <section class="card-section">
+      <div class="sec-header">
+        <h2 class="sec-title">2. Tipografías del Sitio Público (Google Fonts)</h2>
+        <span class="sec-num">Sección 02 · Tipografía</span>
+      </div>
+
+      <div class="typo-grid">
+        <div class="typo-box">
+          <span style="font-size: 0.74rem; font-weight: 700; color: var(--nara-terracota); text-transform: uppercase;">1. Fuente Principal de Marca</span>
+          <div class="typo-sample-montserrat">MONTSERRAT</div>
+          <p style="font-size: 0.84rem; color: var(--nara-gray); margin-bottom: 10px;">
+            <strong>Pesos cargados:</strong> 500 (Medium) y 600 (SemiBold).<br/>
+            <strong>Cómo la usan:</strong> Es la fuente dominante en encabezados, navegación y botones. La aplican en <strong>MAYÚSCULAS</strong> para nombres de áreas (<code>MEDICINA ESTÉTICA</code>, <code>APARATOLOGÍA</code>, <code>COSMETOLOGÍA</code>, <code>SUEROTERAPIA</code>).
+          </p>
+          <div style="font-family: 'Montserrat', sans-serif; font-size: 0.85rem; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #eee;">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz · 1234567890
+          </div>
+        </div>
+
+        <div class="typo-box">
+          <span style="font-size: 0.74rem; font-weight: 700; color: var(--nara-terracota); text-transform: uppercase;">2. Fuente Decorativa / Caligráfica</span>
+          <div class="typo-sample-moondance">Exterioriza tu belleza interior</div>
+          <p style="font-size: 0.84rem; color: var(--nara-gray); margin-bottom: 10px;">
+            <strong>Fuente:</strong> <code>Moon Dance</code> (Google Fonts).<br/>
+            <strong>Cómo la usan:</strong> Fuente script manuscrita cargada en su plantilla para aportar calidez femenina, cercanía y estética de <em>boutique spa</em> en frases emocionales.
+          </p>
+          <div style="font-family: 'Moon Dance', cursive; font-size: 1.45rem; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #eee;">
+            Tu belleza en manos expertas · Nara Medical Spa
+          </div>
+        </div>
+
+        <div class="typo-box">
+          <span style="font-size: 0.74rem; font-weight: 700; color: var(--nara-terracota); text-transform: uppercase;">3. Fuentes Secundarias (Por defecto en Elementor)</span>
+          <div class="typo-sample-roboto">Roboto & Roboto Slab</div>
+          <p style="font-size: 0.84rem; color: var(--nara-gray);">
+            <strong>Pesos:</strong> 100 a 900.<br/>
+            <strong>Observación técnica:</strong> Permanecen activas en el kit global de Elementor (<code>post-7.css</code>) como fallback en párrafos y widgets donde no se forzó <code>Montserrat</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DISEÑO DE MARCA Y LOGOTIPOS -->
+    <section class="card-section">
+      <div class="sec-header">
+        <h2 class="sec-title">3. Diseño de Marca, Logotipos y Dirección Visual</h2>
+        <span class="sec-num">Sección 03 · Identidad Gráfica</span>
+      </div>
+
+      <div class="logos-grid" style="margin-bottom: 24px;">
+        <div class="logo-showcase" style="background: #161213; color: #fff;">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/09/Nara_logo_horizontal_gold.png" alt="Logo Horizontal Dorado" />
+          <span>Logo Horizontal Dorado (Principal)</span>
+        </div>
+
+        <div class="logo-showcase" style="background: #BF8A8E; color: #fff;">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/10/Diseno_sin_titulo__17_-removebg-preview.png" alt="Logo Horizontal Blanco" />
+          <span>Logo Horizontal Blanco (Header Actual)</span>
+        </div>
+
+        <div class="logo-showcase" style="background: #FAF8F6; color: #101010;">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/09/LOGO.png" alt="Logo Vertical Negro y Dorado" />
+          <span>Logo Vertical Negro / Dorado</span>
+        </div>
+
+        <div class="logo-showcase" style="background: #E4E3D3; color: #101010;">
+          <img src="https://naramedspa.com/wp-content/uploads/2024/10/Diseno_sin_titulo__15_-removebg-preview.png" alt="Sello Circular Nara" />
+          <span>Sello Circular / Marca de Agua</span>
+        </div>
+      </div>
+
+      <div class="voice-grid" style="margin-bottom: 0;">
+        <div class="voice-card">
+          <h3>Simbología del Isotipo</h3>
+          <p>Silueta botánica / flor de loto de trazo continuo y minimalista que transmite renovación, pureza, feminidad y armonía sin cirugía, acompañada del nombre <strong>NARA</strong> con tracking amplio y <strong>MEDICAL SPA</strong> debajo.</p>
+        </div>
+        <div class="voice-card">
+          <h3>Texturas y Atmósfera</h3>
+          <p>Utilizan fondos texturizados tipo papel suave/estuco rosado y crema (<code>Nara-texture-scaled.jpg</code>) para alejarse de la frialdad hospitalaria y proyectar un ambiente acogedor de spa boutique.</p>
+        </div>
+        <div class="voice-card">
+          <h3>Estilo Fotográfico Real</h3>
+          <p>Muestran siempre a su equipo real (Dra. Stephanie Flores, Leti, Moni y Sarita) en sus instalaciones de Torre Norte Zona Río, y fotos cuadradas <code>1:1</code> de Antes y Después sin filtros irreales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VOZ, TONO Y PERSONALIDAD VERBAL -->
+    <section class="card-section">
+      <div class="sec-header">
+        <h2 class="sec-title">4. Voz, Tono y Personalidad de Comunicación</h2>
+        <span class="sec-num">Sección 04 · Identidad Verbal</span>
+      </div>
+
+      <div class="voice-grid">
+        <div class="voice-card">
+          <h3>1. Voz Cálida, Humana y Cercana</h3>
+          <p>La palabra que más se repite en todo el sitio es <strong>"cálida / calidez"</strong>. Hablan como una doctora joven y amable que te recibe sin juicios. Incluso llaman con cariño <em>"Leti"</em> a su cosmetóloga y <em>"Sarita"</em> a su recepcionista en las biografías oficiales.</p>
+        </div>
+
+        <div class="voice-card">
+          <h3>2. Belleza desde el Interior (Naturalidad)</h3>
+          <p>Su eje filosófico es <strong>"Exterioriza tu belleza interior"</strong>. Ven a cada paciente como <em>"una obra de arte que se puede ir transformando hasta expresar nuestra verdadera esencia"</em> mediante resultados sin cirugía.</p>
+        </div>
+
+        <div class="voice-card">
+          <h3>3. Médica pero Cero Intimidante</h3>
+          <p>Respaldan su autoridad con datos duros (<strong>Médico Estético Certificado Céd. Prof. 11777648</strong>, <strong>Cosmetóloga Licenciada</strong> y <strong>productos certificados por COFEPRIS</strong>), pero explican cada tratamiento con lenguaje sencillo y cotidiano.</p>
+        </div>
+
+        <div class="voice-card">
+          <h3>4. Calidad a Precio Accesible</h3>
+          <p>No buscan parecer inalcanzables; al contrario, destacan abiertamente ofrecer <strong>"los mejores precios del rubro médico en Tijuana"</strong> y <em>"un servicio con calidez, calidad y sobre todo, un excelente precio"</em>.</p>
+        </div>
+      </div>
+
+      <span class="sub-label">Características del Tono en sus Textos</span>
+      <ul style="font-size: 0.88rem; color: var(--nara-dark); padding-left: 20px; margin-bottom: 24px; line-height: 1.8;">
+        <li><strong>Segunda persona directa ("Tú"):</strong> <em>"Tu belleza en manos expertas"</em>, <em>"¡Obtén el tipo de labios que tú deseas!"</em>, <em>"Queremos acompañarte en todo momento"</em>.</li>
+        <li><strong>Tono entusiasta y exclamativo:</strong> Uso constante de signos de admiración (<code>¡...!</code>) en títulos y llamados a la acción para transmitir emoción y confianza.</li>
+        <li><strong>Inclusivo (Mujeres y Hombres):</strong> Aunque la paleta rosa malva es femenina, en tratamientos como mentón, contorno mandibular, lifting y cabello especifican explícitamente que son para hombres y mujeres.</li>
+      </ul>
+
+      <span class="sub-label">Banco de Eslóganes y Frases Textuales del Sitio Original</span>
+      <div class="quotes-list">
+        <div class="quote-item">
+          <span>Eslogan Principal (Hero)</span>
+          <blockquote>“Tu belleza en manos expertas”</blockquote>
+        </div>
+        <div class="quote-item">
+          <span>Manifiesto de Marca</span>
+          <blockquote>“Exterioriza tu belleza interior”</blockquote>
+        </div>
+        <div class="quote-item">
+          <span>Promesa de Resultados</span>
+          <blockquote>“¡Resultados sin cirugías!”</blockquote>
+        </div>
+        <div class="quote-item">
+          <span>Filosofía Nara (en /conocenos/)</span>
+          <blockquote>“Nara Medical Spa se encarga de brindarte un servicio con calidez, calidad y sobre todo, un excelente precio.”</blockquote>
+        </div>
+        <div class="quote-item">
+          <span>Propuesta Integral</span>
+          <blockquote>“Te ofrecemos un servicio completo; donde la medicina estética y cosmetología se complementan para obtener los resultados que tú deseas.”</blockquote>
+        </div>
+        <div class="quote-item">
+          <span>Invitación al Paciente</span>
+          <blockquote>“¡Coméntanos tus objetivos de belleza! Queremos acompañarte en todo momento.”</blockquote>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
